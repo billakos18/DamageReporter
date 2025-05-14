@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .sign-in-btn, .sign-out-btn {
     background: var(--c4);
     color: white;
@@ -182,7 +181,7 @@ footer {
 }
 footer p{
     margin: 0;
-=======
+}
 .sign-in-btn, .sign-out-btn {
     background: var(--c4);
     color: white;
@@ -366,5 +365,5 @@ footer {
 }
 footer p{
     margin: 0;
->>>>>>> c975d78b918c253f7fe27211520e90e3873b3ac6
+
 }
