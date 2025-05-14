@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 document.querySelector(".register-link").addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector(".login-container").style.display = "none";
@@ -110,7 +109,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (startFlag) startFlag.click();
 });
 
-=======
 document.querySelector(".register-link").addEventListener("click", function (e) {
     e.preventDefault();
     document.querySelector(".login-container").style.display = "none";
@@ -222,4 +220,3 @@ window.addEventListener('DOMContentLoaded', () => {
     if (startFlag) startFlag.click();
 });
 
->>>>>>> c975d78b918c253f7fe27211520e90e3873b3ac6

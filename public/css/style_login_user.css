@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 :root {
     --c1: #f8f9fa;
     --c2: #ffffff;
@@ -185,7 +185,7 @@ footer {
     color: var(--text);
     padding: 1rem;
     text-align: center;
-=======
+}
 :root {
     --c1: #f8f9fa;
     --c2: #ffffff;
@@ -372,5 +372,5 @@ footer {
     color: var(--text);
     padding: 1rem;
     text-align: center;
->>>>>>> c975d78b918c253f7fe27211520e90e3873b3ac6
+
 }
