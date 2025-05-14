@@ -1,0 +1,127 @@
+<div class="wizard-container">
+    <!-- <iframe async defer src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12530.315626848556!2d21.749541949999998!3d38.2660713!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sgr!4v1743340672678!5m2!1sen!2sgr" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+    <!-- <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=18.781127929687504%2C36.681636065615216%2C25.845336914062504%2C39.44891948347229&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?#map=8/38.078/22.313">View Larger Map</a></small> -->
+    <div id="map" style="height: 100%; width: 100%; position: absolute; z-index: 0; pointer-events: none;"></div>
+    <div id= "wizard-step-1" class="wizard">
+        <h2>Δήλωση Βλάβης</h2>
+        <form action="#" method="">
+            <div class="row">
+                <div class="input-group">
+                    <label id="street-label" for="steet">Οδός</label>
+                    <input type="text" id="street" name="street" placeholder="π.χ. Κορίνθου" required>
+                </div>
+                <div class="input-group">
+                    <label id="street-number-label" for="street-number">Αριθμός</label>
+                    <input type="text" id="street-number" name="street-number" placeholder="π.χ. 12, 12A, -" pattern="\\-|(\d+[α-ωΑ-Ωa-zA-Z]?)" required>
+                </div>
+                <div class="input-group">
+                    <label id="postal-code-label" for="postal-code">Τ.Κ.</label>
+                    <input type="text" id="postal-code" name="postal-code" placeholder="π.χ. 264 41 ή 26441" pattern="(\d{3}[ ]?\d{2})" maxlength="6" required>
+                </div>
+            </div>
+            <div class="row-select">
+                <div class="input-group">
+                    <label id="area-label" for="area">Περιοχή</label>
+                    <select id="area" name="area" placeholder="Επιλέξτε περιοχή..." required>
+                        <option value="" disabled selected> Επιλέξτε περιοχή...</option>
+                        <option value="area1">Αγία Σοφία</option>
+                        <option value="area2">Αγυιά</option>
+                        <option value="area3">Άγιος Ανδρέας</option>
+                        <option value="area4">Αμπελόκηποι</option>
+                        <option value="area4">Ανθούπολη</option>
+                        <option value="area4">Άλλο</option>
+                    </select>
+                </div>
+            </div>
+            <div class="current-loc-container">
+                <button type="button" class="current-loc-btn">Τρέχουσα Τοποθεσία</button>
+            </div>
+            <div class="next-btn-container">
+                <button type="button" class="next-btn">Επόμενο</button>
+            </div>
+            <div class="choose-loc-container">
+                <button type="button" class="choose-loc-btn">Επιλέξτε στον χάρτη</button>
+            </div>
+        </form>
+    </div>
+    <div id="wizard-step-2" class= "wizard" style="display: none">
+        <h2>Πληροφορίες Δήλωσης</h2>
+        <form action="#" method="">
+            <div class="row-select">
+                <div class="input-group">
+                    <label id="damage-type-label" for="area">Τύπος Βλάβης</label>
+                    <select id="damage" name="damage" placeholder="Τύπος Βλάβης..." required>
+                        <option value="" disabled selected> Επιλέξτε βλάβη...</option>
+                        <option value="type1">Χαλασμένος σωλήνας νερού</option>
+                        <option value="type2">Διαρροές αερίου</option>
+                        <option value="type3">Χαλασμένα φανάρια</option>
+                        <option value="type4">Εκτεθειμένα καλώδια ή ηλεκτρολογικοί κίνδυνοι</option>
+                        <option value="type5">Λακκούβες</option>
+                        <option value="type6">Πεσμένα δέντρα ή κλαδιά</option>
+                        <option value="type8">Σπασμένα πεζοδρόμια</option>
+                        <option value="type9">Κατεστραμμένα παγκάκια</option>
+                        <option value="type10">Παράνομη απόρριψη απορριμμάτων</option>
+                        <option value="type11">Ανοιχτά ή χωρίς κάλυμμα φρεάτια</option>
+                        <option value="type12">Σπασμένες παιδικές χαρές</option>
+                        <option value="type13">Χαλασμένος δημοτικός φωτισμός</option>
+                        <option value="type14">Κατεστραμμένες στάσεις λεωφορείων</option>
+                        <option value="type15">Ρωγμές σε τοίχους δημόσιων κτιρίων</option>
+                        <option value="type16">Άλλο</option>
+                    </select>
+                </div>
+            </div>
+            <div class="input-group">
+                <label id="comments-label" for="comments">Σχόλια</label>
+                <input type="text" id="comments" name="comments" placeholder="Αναφέρετε σχόλια σχετικά με την βλάβη" rows="10" required>
+            </div>
+            
+            <div class="next-btn-container">
+                <button type="button" id="next-btn-w2" class="next-btn">Επόμενο</button>
+            </div>
+            <div class="previous-container">
+                <button type="button" id="previous-btn-w2" class="previous-btn">Προηγούμενο</button>
+            </div>
+            <div class="input-group">
+                <label id="image-label" for="image">Φωτογραφία (προαιρετικό)</label>
+                <input type="file" id="image" name="image" accept="image/*" capture="environment">
+            </div>
+        </form>
+    </div>
+    <div id="wizard-step-3" class= "wizard" style="display: none">
+        <h2>Πληροφορίες Επικοινωνίας</h2>
+        <div class="row">
+            <div class="input-group">
+                <label id="first-name-label" for="first-name">Όνομα</label>
+                <input type="text" id="first-name" name="first-name" required>
+            </div>
+            <div class="input-group">
+                <label id="last-name-label" for="last-name">Επώνυμο</label>
+                <input type="text" id="last-name" name="last-name" required>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="input-group">
+                <label id="mobile-label" for="modile">Κινητό</label>
+            <input type="text" id="modile" name="modile" placeholder="69xxxxxxxx" pattern="^69\d{8}$" maxlength="10" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+        </div>
+        <div class="report-container">
+            <button type="button" id="report-btn-w3" class="report-btn">Δήλωση</button>
+        </div>
+        <div class="previous-container">
+            <button type="button" id="previous-btn-w3" class="previous-btn">Προηγούμενο</button>
+        </div>
+    </div>
+</div>
+<button id="use-location-btn" style="display: none;" class="use-location-btn">
+    Χρήση Τοποθεσίας
+</button>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
