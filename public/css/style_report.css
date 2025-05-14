@@ -2,7 +2,12 @@ html{
     height:100%;
     /* font-size: clamp(14px, 1vw, 18px); */
 }
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background 0.3s ease, color 0.3s ease;
+}
 
 .sign-in-btn {
     background: var(--c4);
