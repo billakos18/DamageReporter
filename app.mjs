@@ -1,6 +1,7 @@
 import express from 'express';
 import session from 'express-session';
 import { engine } from 'express-handlebars';
+import damagesRoutes from './routes/damages_routes.mjs';
 
 const app = express();
 const router = express.Router();
@@ -18,9 +19,23 @@ app.use(session({
 app.engine('hbs', engine({
     extname: '.hbs',
     defaultLayout: 'main',
-    layoutsDir: 'views/layouts'
+    layoutsDir: 'views/layouts',
+    helpers: { // Custom helpers
+        json: (context) => {
+            JSON.stringify(context)
+            },
+        formatDate: (dateString, formatStr = 'PPpp') => {
+            return format(new Date(dateString), formatStr);
+            }
+    }
 }));
 app.set('view engine', 'hbs');
+
+// Use routes
+app.use('/', damagesRoutes);
+
+const PORT = process.env.PORT || 3005;
+app.listen(PORT, () => console.log(`Server running at http://127.0.0.1:${PORT}`));
 
 // // Main route
 // router.get("/", (req, res) => {
@@ -90,12 +105,4 @@ app.set('view engine', 'hbs');
 
 // Import routes
 
-import damagesRoutes from './routes/damages_routes.mjs';
 
-
-// Use routes
-app.use('/', damagesRoutes);
-
-
-const PORT = process.env.PORT || 3005;
-app.listen(PORT, () => console.log(`Server running at http://127.0.0.1:${PORT}`));

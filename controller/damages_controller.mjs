@@ -79,12 +79,12 @@ export async function reportDamage(req, res) {
 
 export async function showRecentReports(req, res) {
     try {
-        // const recentReports = await model.getRecentReports();
+        const recentReports = await model.getRecentReports();
         res.render("recent_reports", { 
             title: "Recent Reports",
             css: "style_recent_reports.css",
             script: "recent_reports.js",
-            // reports: recentReports,
+            reports: JSON.stringify(recentReports),
             user: req.session.user || null,
             hideAuthButton: false,
             map: true

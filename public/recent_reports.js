@@ -1,3 +1,6 @@
+let selectedCoords = null;
+let marker;
+
 const map = L.map('map', { attributionControl: false }).setView([38.2466, 21.7346], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
@@ -39,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
             signin: "Sign In/Sign Up",
             signout: "Sign Out",
         }
-    };
+    }
 
     const savedLang = localStorage.getItem('lang') || 'el';
     document.querySelectorAll(".lang-flag").forEach(flag => {
@@ -65,3 +68,17 @@ window.addEventListener('DOMContentLoaded', () => {
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });
+
+
+// Show recent reports on the map as markers
+if (window.reports) {
+    window.reports.forEach(report => {
+        const marker = L.marker([report.report_latitude, report.report_longitude]).addTo(map);
+        marker.bindPopup(`
+            <strong>${report.report_type}</strong><br>
+            ${report.report_date}<br>
+            ${report.report_status}<br>
+        `);
+    });
+
+}
