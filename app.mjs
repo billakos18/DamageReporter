@@ -22,71 +22,80 @@ app.engine('hbs', engine({
 }));
 app.set('view engine', 'hbs');
 
-// Main route
-router.get("/", (req, res) => {
-    res.render("home", { 
-        title: "City Damage Reporter",
-        css: "style_index.css",
-        script: "index_script.js",
-        hideAuthButton: false,
-        user: req.session.user || null
-    })
-});
+// // Main route
+// router.get("/", (req, res) => {
+//     res.render("home", { 
+//         title: "City Damage Reporter",
+//         css: "style_index.css",
+//         script: "index_script.js",
+//         hideAuthButton: false,
+//         user: req.session.user || null
+//     })
+// });
 
-app.use("/", router);
+// app.use("/", router);
 
-// Login route
-router.get("/login", (req, res) => {
-    res.render("login", { 
-        title: "City Damage Reporter",
-        css: "style_login_user.css",
-        script: "login_user.js",
-        hideAuthButton: true
-    })
-});
+// // Login route
+// router.get("/login", (req, res) => {
+//     res.render("login", { 
+//         title: "City Damage Reporter",
+//         css: "style_login_user.css",
+//         script: "login_user.js",
+//         hideAuthButton: true
+//     })
+// });
 
-router.post("/login", (req, res) => {
-    const { 'email-login': username, 'password-login': password } = req.body;
+// router.post("/login", (req, res) => {
+//     const { 'email-login': username, 'password-login': password } = req.body;
 
-    if (username === "test@bil" && password === "bil") {
-        req.session.user = { username };
-        console.log(`User ${username} logged in`)
-        return res.redirect("/");
-    } else {
-        return res.redirect("/login?error=1")
-    }
-});
+//     if (username === "test@bil" && password === "bil") {
+//         req.session.user = { username };
+//         console.log(`User ${username} logged in`)
+//         return res.redirect("/");
+//     } else {
+//         return res.redirect("/login?error=1")
+//     }
+// });
 
-app.use("/login", router);
+// app.use("/login", router);
 
-// Report route
-router.get("/report", (req, res) => {
-    res.render("report", { 
-        title: "Report Damage",
-        css: "style_report.css", 
-        script: "report.js",
-        hideAuthButton: false,
-        user: req.session.user || null,
-        map: true
-    });
-});
-app.use("/report", router);
+// // Report route
+// router.get("/report", (req, res) => {
+//     res.render("report", { 
+//         title: "Report Damage",
+//         css: "style_report.css", 
+//         script: "report.js",
+//         hideAuthButton: false,
+//         user: req.session.user || null,
+//         map: true
+//     });
+// });
+// app.use("/report", router);
 
-// Communication route
-router.get("/communication", (req, res) => {
-    res.render("communication", { 
-        title: "Communication",
-        css: "style_communication.css",
-        script: "communication.js",
-        user: req.session.user || null,
-        hideAuthButton: false
-    })
-});
-app.use("/communication", router);
-// 404 fallback
-app.use((req, res) => {
-    res.status(404).send("Page Not Found");
-});
+// // Communication route
+// router.get("/communication", (req, res) => {
+//     res.render("communication", { 
+//         title: "Communication",
+//         css: "style_communication.css",
+//         script: "communication.js",
+//         user: req.session.user || null,
+//         hideAuthButton: false
+//     })
+// });
+// app.use("/communication", router);
+// // 404 fallback
+// app.use((req, res) => {
+//     res.status(404).send("Page Not Found");
+// });
+
+// Import routes
+
+import damagesRoutes from './routes/damages_routes.mjs';
+
+
+// Use routes
+app.use('/', damagesRoutes);
+
 
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => console.log(`Server running at http://127.0.0.1:${PORT}`));

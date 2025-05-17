@@ -22,7 +22,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const texts = {
       el: {
         home: "Αρχική",
-        reports: "Πρόσφατες Αναφορές",
+        reports: "Αναφορές",
         contact: "Επικοινωνία",
         signin: "Είσοδος/Εγγραφή",
         signout: "Έξοδος",
@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
       },
       en: {
         home: "Home",
-        reports: "Recent Reports",
+        reports: "Reports",
         contact: "Contact",
         signin: "Sign In / Register",
         signout: "Sign Out",

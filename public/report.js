@@ -96,18 +96,6 @@ document.querySelector(".current-loc-btn").addEventListener("click", () => {
             // Fill form with address
             if (selectedCoords) {
                 console.log('Current location found, reverse geocoding...');
-                // reverseGeocode(selectedCoords.lat, selectedCoords.lng).then(address => {
-                //     if (address) {
-                //         document.getElementById("street").value = address.road || '';
-                //         document.getElementById("street-number").value = address.house_number || '';
-                //         document.getElementById("postal-code").value = address.postcode || '';
-                //     } else {
-                //         alert("Δεν ήταν δυνατός ο εντοπισμός διεύθυνσης.");
-                //     }
-                // }).catch(error => {
-                //     alert("Δεν ήταν δυνατός ο εντοπισμός διεύθυνσης.");
-                //     console.error("Reverse geocoding failed:", error);
-                // });
                 const address = await reverseGeocode(selectedCoords.lat, selectedCoords.lgn);
                 if (address) {
                     document.getElementById("street").value = address.road || '';
@@ -195,7 +183,7 @@ const el = document.documentElement;
 const texts = {
     el: {
         home: "Αρχική",
-        reports: "Πρόσφατες Αναφορές",
+        reports: "Αναφορές",
         contact: "Επικοινωνία",
         signin: "Είσοδος/Εγγραφή",
         signout: "Έξοδος",
@@ -245,7 +233,7 @@ const texts = {
     },
     en: {
         home: "Home",
-        reports: "Recent Reports",
+        reports: "Reports",
         contact: "Contact",
         signin: "Sign In/Sign Up",
         signout: "Sign Out",

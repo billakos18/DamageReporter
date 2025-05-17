@@ -1,3 +1,8 @@
+const map = L.map('map', { attributionControl: false }).setView([38.2466, 21.7346], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+}).addTo(map);
+
 window.addEventListener('DOMContentLoaded', () => {
     const toggle = document.querySelector('#theme-toggle');
     const header = document.querySelector('header');
@@ -24,20 +29,15 @@ window.addEventListener('DOMContentLoaded', () => {
             home: "Αρχική",
             reports: "Αναφορές",
             contact: "Επικοινωνία",
-            h2: "Είσοδος Χρήστη",
-            password: "Κωδικός",
-            login: "Είσοδος",
-            register: "Δεν έχεις λογαριασμό;",
+            signin: "Είσοδος/Εγγραφή",
+            signout: "Έξοδος",
         },
         en: {
             home: "Home",
             reports: "Reports",
             contact: "Contact",
-            h2: "User Login",
-            password: "Password",
-            login: "Login",
-            register: "Don't have an account?",
-
+            signin: "Sign In/Sign Up",
+            signout: "Sign Out",
         }
     };
 
@@ -49,13 +49,9 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector(".header_opt:nth-child(1)").textContent = t.home;
             document.querySelector(".header_opt:nth-child(2)").textContent = t.reports;
             document.querySelector(".header_opt:nth-child(3)").textContent = t.contact;
-            document.querySelector(".login-container h2").textContent = t.h2;
-            document.querySelector("#password-login-label").textContent = t.password;
-            document.querySelector(".login-btn").textContent = t.login;
-            document.querySelector(".register-link").textContent = t.register;
-
 
             el.lang = lang;
+            // document.querySelector("#")
             if (el.lang === "en") {
                 document.querySelector("#gr").style.display = "block";
                 document.querySelector("#eng").style.display = "none";
@@ -69,6 +65,3 @@ window.addEventListener('DOMContentLoaded', () => {
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });
-
-
-

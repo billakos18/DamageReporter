@@ -24,20 +24,23 @@ window.addEventListener('DOMContentLoaded', () => {
             home: "Αρχική",
             reports: "Αναφορές",
             contact: "Επικοινωνία",
-            h2: "Είσοδος Χρήστη",
-            password: "Κωδικός",
-            login: "Είσοδος",
-            register: "Δεν έχεις λογαριασμό;",
+            signup_h2: "Στοιχεία Εγγραφής",
+            signup_email: "Email ή Κινητό",
+            signup_password: "Κωδικός",
+            signup_repassword: "Επαλήθευση Κωδικού",
+            signup_btn: "Εγγραφή",
+            signup_register: "Έχεις ήδη λογαριασμό;"
         },
         en: {
             home: "Home",
             reports: "Reports",
             contact: "Contact",
-            h2: "User Login",
-            password: "Password",
-            login: "Login",
-            register: "Don't have an account?",
-
+            signup_h2: "Sign Up",
+            signup_email: "Email or Mobile",
+            signup_password: "Password",
+            signup_repassword: "Re-enter Password",
+            signup_btn: "Sign Up",
+            signup_register: "Already have an account?",
         }
     };
 
@@ -49,13 +52,15 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector(".header_opt:nth-child(1)").textContent = t.home;
             document.querySelector(".header_opt:nth-child(2)").textContent = t.reports;
             document.querySelector(".header_opt:nth-child(3)").textContent = t.contact;
-            document.querySelector(".login-container h2").textContent = t.h2;
-            document.querySelector("#password-login-label").textContent = t.password;
-            document.querySelector(".login-btn").textContent = t.login;
-            document.querySelector(".register-link").textContent = t.register;
-
+            document.querySelector(".signup-container h2").textContent = t.signup_h2;
+            document.querySelector("#email-signup-label").textContent = t.signup_email;
+            document.querySelector("#password-signup-label").textContent = t.signup_password;
+            document.querySelector("#reenter-password-singup-label").textContent = t.signup_repassword;
+            document.querySelector(".signup-btn").textContent = t.signup_btn;
+            document.querySelector(".login-link").textContent = t.signup_register;
 
             el.lang = lang;
+            // document.querySelector("#")
             if (el.lang === "en") {
                 document.querySelector("#gr").style.display = "block";
                 document.querySelector("#eng").style.display = "none";
@@ -70,5 +75,10 @@ window.addEventListener('DOMContentLoaded', () => {
     if (startFlag) startFlag.click();
 });
 
+document.querySelector(".signup-btn").addEventListener("click", () => {
 
+    if (document.querySelector('#password-signup').value !== document.querySelector('#password-signup-check').value) {
+        console.log('no')
+    }
 
+})
