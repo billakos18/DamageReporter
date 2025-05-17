@@ -3,6 +3,12 @@ html{
     /* font-size: clamp(14px, 1vw, 18px); */
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
 
 .sign-in-btn {
     background: var(--c4);
@@ -157,7 +163,7 @@ iframe{
     aspect-ratio: 3/2;
     text-align: center;
     z-index:1;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease, background 0.4s ease;
 }
 
 .wizard h2 {
@@ -269,7 +275,7 @@ iframe{
     background-color: #f9f9f9;
     font-size: 14px;
     cursor: pointer;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.5s ease;
     width: fit-content;
 }
 #image::-webkit-file-upload-button {
@@ -279,7 +285,7 @@ iframe{
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.5s ease;
 }
 
 /* Third step wizard */

@@ -4,7 +4,7 @@ import { engine } from 'express-handlebars';
 import damagesRoutes from './routes/damages_routes.mjs';
 
 const app = express();
-const router = express.Router();
+// const router = express.Router();
 
 // Static files (style_index.css, images, scripts)
 app.use(express.static('public'));

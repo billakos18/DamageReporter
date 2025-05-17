@@ -116,11 +116,20 @@ document.querySelector(".current-loc-btn").addEventListener("click", () => {
 
 document.querySelector('.next-btn').addEventListener('click', () => {
     const form = document.querySelector('#wizard-step-1 form');
+    const street_Name = document.querySelector('#street');
+    const street_Number = document.querySelector('#street-number');
+    const postal_Code = document.querySelector('#postal-code');
+    const area_ = document.querySelector('#area');
 
-    if (!form.checkValidity()) {
-        form.reportValidity(); // this shows native browser errors + red borders
+
+    if (!street_Name.checkValidity() || !street_Number.checkValidity() || !postal_Code.checkValidity() || !area_.checkValidity()) {
+        street_Name.reportValidity();
+        street_Number.reportValidity();
+        postal_Code.reportValidity();
+        area_.reportValidity();
         return;
     }
+
     let streetName = document.querySelector('#street').value;
     let streetNumber = document.querySelector('#street-number').value;
     let postalCode = document.querySelector('#postal-code').value;
@@ -145,12 +154,18 @@ document.querySelector('#previous-btn-w2').addEventListener('click', () => {
 })
 
 document.querySelector('#next-btn-w2').addEventListener('click', () => {
-    const form = document.querySelector('#wizard-step-1 form');
+    // const form = document.querySelector('#wizard-step-1 form');
 
-    if (!form.checkValidity()) {
-        form.reportValidity(); // this shows native browser errors + red borders
+    // if (!form.checkValidity()) {
+    //     form.reportValidity(); // this shows native browser errors + red borders
+    //     return;
+    // }
+    const damageSelect = document.querySelector("#damage");
+    if (!damageSelect.checkValidity()) {
+        damageSelect.reportValidity();
         return;
     }
+
     document.querySelector('#wizard-step-2').style.display = "none";
     document.querySelector('#wizard-step-3').style.display = "block";
 });
