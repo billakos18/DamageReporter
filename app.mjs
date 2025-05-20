@@ -2,6 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import { engine } from 'express-handlebars';
 import damagesRoutes from './routes/damages_routes.mjs';
+import argon from 'argon2';
 
 const app = express();
 // const router = express.Router();
@@ -9,8 +10,12 @@ const app = express();
 // Static files (style_index.css, images, scripts)
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
+
+// Session setup
 app.use(session({
-    secret: '1234',
+    // secret: argon.hash('a_really_big_secret_key_that_not_even_I_know_and_is_hard_to_guess'),
+    secret: "b59b5c26b1587938d65cc8a8fa8ce01b",
+    cookie: { maxAge: 1000 * 60 * 10 }, // 10 minutes
     resave: false,
     saveUninitialized: false
 }));
@@ -26,7 +31,9 @@ app.engine('hbs', engine({
             },
         formatDate: (dateString, formatStr = 'PPpp') => {
             return format(new Date(dateString), formatStr);
-            }
+            },
+         eq: (a, b) => a == b,
+         not: (a) => !a
     }
 }));
 app.set('view engine', 'hbs');

@@ -1,0 +1,84 @@
+<section class="user-home">
+  <div class="user-container">
+
+    <!-- Welcome and report container -->
+    <div class="left-panel">
+      <h2>Καλώς Ήρθες!</h2>
+      <p>Είσαι έτοιμος να καταγράψεις ένα νέο πρόβλημα;</p>
+      <a href="/report" class="report-btn">Αναφορά Προβλήματος</a>
+    </div>
+
+    {{!-- Users Reports --}}
+    <div class="right-panel">
+      <h2>Οι Αναφορές Μου</h2>
+      <div class="report-list">
+        {{#if reports}}
+          {{#each reports}}
+                    {{#if (eq this.report_status "rejected")}}
+                      <div class="report-item" style="background-color: #f82536;">
+                        <h4>{{this.report_type}}</h4>
+                        <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                        <p>{{this.report_status}}</p>
+                      </div>
+                    {{else}}
+                      {{#if (eq this.report_status "in progress")}}
+                        <div class="report-item" style="background-color: #ffab66;">
+                          <h4>{{this.report_type}}</h4>
+                          <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                          <p>{{this.report_status}}</p>
+                        </div>
+                      {{else}}
+                        {{#if (eq this.report_status "completed")}}
+                          <div class="report-item" style="background-color: #1dd18c;">
+                            <h4>{{this.report_type}}</h4>
+                            <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                            <p>{{this.report_status}}</p>
+                          </div>
+                        {{else}}
+                          {{#if (eq this.report_status "approved")}}
+                            <div class="report-item" style="background-color: #a3559a;">
+                              <h4>{{this.report_type}}</h4>
+                              <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                              <p>{{this.report_status}}</p>
+                            </div>
+                          {{else}}
+                            {{#if (eq this.report_status "received")}}
+                              <div class="report-item">
+                                <h4>{{this.report_type}}</h4>
+                                <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                                <p>{{this.report_status}}</p>
+                              </div>
+                            {{/if}}
+                          {{/if}}
+                        {{/if}}
+                      {{/if}}
+                    {{/if}}
+          {{/each}}
+        {{else}}
+          <p id="no-reports-msg">Δεν έχετε υποβάλει αναφορές ακόμα.</p>
+        {{/if}} 
+        {{!-- Example report items for testing --}}
+          <div class="report-item" style="background-color: #ffab66;">
+            <h4>Test</h4>
+            <p>Test</p>
+            <p>Test</p>
+          </div>
+          <div class="report-item" style="background-color: #f82536;">
+            <h4>Test</h4>
+            <p>Test</p>
+            <p>Test</p>
+          </div>
+          <div class="report-item" style="background-color: #1dd18c;">
+            <h4>Test</h4>
+            <p>Test</p>
+            <p>Test</p>
+          </div>
+          <div class="report-item" style="background-color: #a3559a;">
+            <h4>Test</h4>
+            <p>Test</p>
+            <p>Test</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

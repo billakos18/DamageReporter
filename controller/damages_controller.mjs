@@ -1,10 +1,22 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-const model = await import(`../model/bettersqlite3.mjs`);
+const model = await import(`../model/damages_model.mjs`);
 
 export async function showHome(req, res) {
     try {
+        if (req.session.user) {
+            const reports = await model.getUserReports(req.session.user.user_phone);
+            res.render('user_main', { 
+                reports: reports,
+                title: "City Damage Reporter",
+                css: "style_user_main.css",
+                script: "user_main.js",
+                user: req.session.user,
+                hideAuthButton: false
+            });
+            return;
+        }
         res.render("home", { 
             title: "City Damage Reporter",
             css: "style_index.css",
@@ -33,33 +45,6 @@ export async function showCommunications(req, res) {
     }
 }
 
-export async function showLogin(req, res) {
-    try {
-        res.render("login", { 
-            title: "City Damage Reporter",
-            css: "style_login_user.css",
-            script: "login_user.js",
-            hideAuthButton: true
-        });
-    } catch (error) {
-        console.error('Error rendering login page:', error);
-        res.status(500).send('Internal Server Error');
-    }
-}
-
-export async function showSignup(req, res) {
-    try {
-        res.render("signup", { 
-            title: "City Damage Reporter",
-            css: "style_login_user.css",
-            script: "signup_user.js",
-            hideAuthButton: true
-        });
-    } catch (error) {
-        console.error('Error rendering signup page:', error);
-        res.status(500).send('Internal Server Error');
-    }
-}
 
 export async function reportDamage(req, res) {
     try {

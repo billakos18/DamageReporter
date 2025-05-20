@@ -8,12 +8,19 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const damagesController = await import(`../controller/damages_controller.mjs`);
+const loginController = await import(`../controller/login_controller.mjs`);
+
 
 router.get('/', damagesController.showHome);
 router.get('/communication', damagesController.showCommunications);
 router.get('/report', damagesController.reportDamage);
-router.get('/login', damagesController.showLogin);
-router.get('/signup', damagesController.showSignup);
+router.get('/login', loginController.showLogin);
+router.get('/signup', loginController.showSignup);
 router.get('/recentReports', damagesController.showRecentReports);
+
+router.post('/login', loginController.loginUser)
+router.post('/signup', loginController.signupUser);
+
+router.post('/logout', loginController.logoutUser);
 
 export default router;

@@ -24,25 +24,24 @@ window.addEventListener('DOMContentLoaded', () => {
             home: "Αρχική",
             reports: "Αναφορές",
             contact: "Επικοινωνία",
-            signup_h2: "Στοιχεία Εγγραφής",
-            signup_email: "Email",
-            signup_phone: "Κινητό Τηλέφωνο",
-            signup_password: "Κωδικός",
-            signup_repassword: "Επαλήθευση Κωδικού",
-            signup_btn: "Εγγραφή",
-            signup_register: "Έχεις ήδη λογαριασμό;"
+            logout: "Έξοδος",
+            left_panel_header: "Καλώς ήρθες",
+            left_panel_par: "Είσαι έτοιμος να καταγράψεις ένα νέο πρόβλημα;",
+            report_btn: "Αναφορά Προβλήματος",
+            right_panel_header: "Οι Αναφορές Μου",
+            right_panel_par: "Δεν έχετε υποβάλει αναφορές ακόμα."
+            
         },
         en: {
             home: "Home",
             reports: "Reports",
             contact: "Contact",
-            signup_h2: "Sign Up",
-            signup_email: "Email",
-            signup_phone: "Phone Number",
-            signup_password: "Password",
-            signup_repassword: "Re-enter Password",
-            signup_btn: "Sign Up",
-            signup_register: "Already have an account?",
+            logout: "Logout",
+            left_panel_header: "Welcome",
+            left_panel_par: "Are you ready to report a new issue for your city?",
+            report_btn: "Report an Issue",
+            right_panel_header: "My Reports",
+            right_panel_par: "You have not submitted any reports yet.",
         }
     };
 
@@ -54,13 +53,14 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector(".header_opt:nth-child(1)").textContent = t.home;
             document.querySelector(".header_opt:nth-child(2)").textContent = t.reports;
             document.querySelector(".header_opt:nth-child(3)").textContent = t.contact;
-            document.querySelector(".signup-container h2").textContent = t.signup_h2;
-            document.querySelector("#email-signup-label").textContent = t.signup_email;
-            document.querySelector("#phone-signup-label").textContent = t.signup_phone;
-            document.querySelector("#password-signup-label").textContent = t.signup_password;
-            document.querySelector("#reenter-password-singup-label").textContent = t.signup_repassword;
-            document.querySelector(".signup-btn").textContent = t.signup_btn;
-            document.querySelector(".login-link").textContent = t.signup_register;
+            document.querySelector(".sign-out-btn").textContent = t.logout;
+            document.querySelector(".left-panel h2").textContent = t.left_panel_header;
+            document.querySelector(".left-panel p").textContent = t.left_panel_par;
+            document.querySelector(".left-panel .report-btn").textContent = t.report_btn;
+            document.querySelector(".right-panel h2").textContent = t.right_panel_header;
+            const msgEl = document.querySelector("#no-reports-msg");
+            if (msgEl) msgEl.textContent = t.right_panel_par;
+            
 
             el.lang = lang;
             // document.querySelector("#")

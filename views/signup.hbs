@@ -3,8 +3,12 @@
         <h2>Στοιχεία Εγγραφής</h2>
         <form action="/signup" method="POST">
             <div class="input-group">
-                <label id="email-signup-label" for="email-signup">Email ή Κινητό</label>
+                <label id="email-signup-label" for="email-signup">Email</label>
                 <input type="email" id="email-signup" name="email-signup" required>
+            </div>
+            <div class="input-group">
+                <label id="phone-signup-label" for="phone-signup">Κινητό</label>
+                <input type="phone" id="phone-signup" name="phone-signup" required>
             </div>
             <div class="input-group">
                 <label id="password-signup-label" for="password-signup">Κωδικός</label>
@@ -15,7 +19,7 @@
                 <input type="password" id="password-signup-check" name="password-signup-check" required>
             </div>
             <div class="signup-btn-container">
-                <button type="button" class="signup-btn">Εγγραφή</button>
+                <button type="submit" class="signup-btn">Εγγραφή</button>
             </div>
         </form>
         <a href="/login" class="login-link">Έχεις ήδη λογαριασμό;</a>

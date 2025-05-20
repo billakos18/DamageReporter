@@ -104,12 +104,21 @@
             <div class="row">
                 <div class="input-group">
                     <label id="mobile-label" for="modile">Κινητό</label>
+                    {{#if user}}
+                    <input type="text" id="modile" name="modile" placeholder="69xxxxxxxx" pattern="^69\d{8}$"
+                        maxlength="10" value="{{user.user_phone}}" required>
+                    {{else}}
                     <input type="text" id="modile" name="modile" placeholder="69xxxxxxxx" pattern="^69\d{8}$"
                         maxlength="10" required>
+                    {{/if}}
                 </div>
                 <div class="input-group">
                     <label for="email">Email</label>
+                    {{#if user}}
+                    <input type="email" id="email" name="email" value={{user.user_email}} required>
+                    {{else}}
                     <input type="email" id="email" name="email" required>
+                    {{/if}}
                 </div>
             </div>
             <div class="report-container">
