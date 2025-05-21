@@ -1,5 +1,5 @@
 import { Client } from 'pg'; // PostgreSQL client
-import { argon2d } from 'argon2';
+import argon2 from 'argon2';
 const client = new Client({
   host: 'localhost',
   port: 5432,                // default Postgres port
@@ -25,36 +25,76 @@ export async function getRecentReports(){
     }
 }
 
-export async function findUserByUsernamePassword(email, password){
-    let query = "SELECT user_email, user_phone FROM \"User\" WHERE user_email = $1 AND user_password = $2 LIMIT 1";
+export async function findUserByUsernamePassword(username, password){
+    let query_email = "SELECT user_first_name, user_last_name, user_email, user_phone, user_password FROM \"User\" WHERE user_email = $1 LIMIT 1";
+    let query_phone = "SELECT user_first_name, user_last_name, user_email, user_phone, user_password FROM \"User\" WHERE user_phone = $1 LIMIT 1";
     try{
-        const res = await client.query(query, [email,password]);
-        return res.rows[0];
+        let res = await client.query(query_email, [username]);
+        if(res.rows.length === 0){
+            res = await client.query(query_phone, [username]);
+        }
+        if(res.rows.length === 0){
+            console.log("User not found");  
+            return 
+        }
+        const hashedPass = res.rows[0].user_password;
+        const isValid = await argon2.verify(hashedPass, password);
+        if(!isValid){
+            console.log("Invalid password");
+            return 
+        }
+        return {
+            user_first_name: res.rows[0].user_first_name,
+            user_last_name: res.rows[0].user_last_name,
+            user_email: res.rows[0].user_email,
+            user_phone: res.rows[0].user_phone
+        }
     } catch(err){
         throw err;
     }
 }
 
-export async function registerUser(email, mobile, password, first_name, last_name) {
-    const userId = getUser(email);
-    if(userId!=undefined) {
+export async function registerUser(email, mobile, password, firstName, lastName) {
+    const userId = getUser(mobile, email);
+    if(!userId) {
+        console.log("User already exists:", userId);
         return {}
     } else {
-        let query = "INSERT INTO \"User\" (user_id, user_first_name, user_last_name, user_email, user_password, user_phone) VALUES ($1, $2, $3, $4, $5, $6)";
+        let idQuery = "SELECT count(user_id) FROM \"User\""
+        let query = "INSERT INTO \"User\" (user_id, user_email, user_password, user_phone, user_first_name, user_last_name) VALUES ($1, $2, $3, $4, $5, $6)";
         try {
-            const hashedPass = await argon2d.hash(password, 10);
-            const res = await client.query(query, [1, first_name, last_name, email, hashedPass, mobile]);
-            return res.rows[0];
+            const hashedPass = await argon2.hash(password, 10);
+            const resCount = await client.query(idQuery);
+            const userId = parseInt(resCount.rows[0].count) + 1;
+            const res = await client.query(query, [userId, email, hashedPass, mobile, firstName, lastName]);
+            if (res){
+                const user = {
+                    user_id: userId,
+                    user_email: email,
+                    user_password: hashedPass,
+                    user_phone: mobile,
+                    user_first_name: firstName,
+                    user_last_name: lastName
+                }
+                return user;
+            } else{
+                alert("Internal database error")
+                return {}
+            }
         } catch(err){
             throw err;
         }
     }
 }
 
-export async function getUser(email) {
-    let query = "SELECT user_email FROM \"User\" WHERE user_email = $1";
+export async function getUser(phone, email) {
+    let query_phone = "SELECT user_id FROM \"User\" WHERE user_phone = $1";
+    let query_email = "SELECT user_id FROM \"User\" WHERE user_email = $1";
     try{
-        const res = await client.query(query, [email]);
+        let res = await client.query(query_phone, [phone]);
+        if(res.rows.length === 0){
+            res = await client.query(query_email, [email]);
+        }
         return res.rows[0];
     } catch(err){
         throw err;
@@ -93,36 +133,3 @@ export async function getUserReports(userPhone) {
 //         console.error('Error inserting data into PostgreSQL database:', err);
 //     }
 // }
-
-
-// client.query('INSERT INTO \"User\" (user_id, user_first_name, user_last_name, user_email, user_password, user_phone) VALUES ($1, $2, $3, $4, $5, $6)', [1, 'John', 'Doe', 'example@mail.com', 'password123', '1234567890'])
-//     .then(res => {
-//         console.log('Data inserted into PostgreSQL database:', res);
-//     })
-//     .catch(err => {
-//         console.error('Error inserting data into PostgreSQL database:', err);
-//     });
-// let data = client.query('SELECT * FROM \"User\" where user_id = $1', [1])
-//     .then(res => {
-//         console.log('Data retrieved from PostgreSQL database:', res.rows[0]);
-//         return res.rows;
-//     })
-//     .catch(err => {
-//         console.error('Error retrieving data from PostgreSQL database:', err);
-//     });
-
-// client.query('INSERT INTO \"Report\" (report_id, report_type, report_description, report_date, report_street, report_street_number, report_area, report_pcode, report_latitude, report_longitude, report_status, user_phone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', [145, 'Flood', 'Heavy rain caused flooding in the area', '2023-10-01', 'Main St', '123', 'Downtown', 12345, 40.7128, -74.0060, 'done', '1234567890'])
-//     .then(res => {
-//         console.log('Data inserted into PostgreSQL database:', res);
-//     })
-//     .catch(err => {
-//         console.error('Error inserting data into PostgreSQL database:', err);
-//     });
-// let data = client.query('SELECT * FROM \"Report\"')
-//     .then(res => {
-//         console.log('Data retrieved from PostgreSQL database:', res.rows[0]);
-//         return res.rows;
-//     })
-//     .catch(err => {
-//         console.error('Error retrieving data from PostgreSQL database:', err);
-//     });

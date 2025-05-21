@@ -3,8 +3,8 @@
             <h2>Είσοδος Χρήστη</h2>
             <form action="/login" method="POST">
                 <div class="input-group">
-                    <label for="email-login">Email</label>
-                    <input type="email" id="email-login" name="email-login" required>
+                    <label id="username-label" for="email-login">Email ή Κινητό</label>
+                    <input type="text" id="email-login" name="email-login" required>
                 </div>
                 <div class="input-group">
                     <label id="password-login-label" for="password-login">Κωδικός</label>
@@ -12,6 +12,11 @@
                 </div>
                 <div class="login-btn-container">
                     <button type="submit" class="login-btn">Είσοδος</button>
+                </div>
+                <div style="padding-top: 10px;">
+                    {{#if error}}
+                        <label style="color:red;" class="error-message">{{error}}</label>
+                    {{/if}}
                 </div>
             </form>
             <a href="/signup" class="register-link">Δεν έχεις λογαριασμό;</a>

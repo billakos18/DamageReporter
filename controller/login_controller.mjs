@@ -32,25 +32,22 @@ export async function showSignup(req, res) {
 }
 
 export async function loginUser(req, res) {
-    const email = req.body['email-login'];
+    const username = req.body['email-login'];
     const password = req.body['password-login'];
     try {
-        const user = await model.findUserByUsernamePassword(email, password);
+        const user = await model.findUserByUsernamePassword(username, password);
 
         if (user) {
             req.session.user = user;
-            // const reports = await model.getUserReports(user.user_phone);
-
-            // res.render('user_main', {reports: reports,
-            //     title: "City Damage Reporter",
-            //     user: user,
-            //     css: "style_user_main.css",
-            //     script: "user_main.js",
-            //     hideAuthButton: false
-            // });
             res.redirect('/user_main');
         } else {
-            res.status(401).send('Invalid email or password');
+            res.render('login', {
+                title: "City Damage Reporter",
+                css: "style_login_user.css",
+                script: "login_user.js",
+                hideAuthButton: true,
+                error: 'Invalid username or password'
+            });
         }
     } catch (error) {
         console.error('Error logging in user:', error);
@@ -59,22 +56,35 @@ export async function loginUser(req, res) {
 }
 
 export async function signupUser(req, res) {
-    const { email, mobile, password } = req.body;
+
+    const firstname = req.body['first-name'];
+    const lastname = req.body['last-name'];
+    const email = req.body['email-signup'];
+    const mobile = req.body['phone-signup'];
+    const password = req.body['password-signup'];
     try {
-        const user = await model.registerUser(email, mobile, password);
+        const existingUser = await model.getUser(mobile, email);
+        if (existingUser) {
+            return res.render('signup', {
+                title: "City Damage Reporter",
+                css: "style_login_user.css",
+                script: "signup_user.js",
+                hideAuthButton: true,
+                error: 'User already exists'
+            });
+        }
+        const user = await model.registerUser(email, mobile, password, firstname, lastname);
         if (user) {
             req.session.user = user;
-            // const reports = await model.getUserReports(user.user_phone);
-            // res.render('user_main', {reports: reports,
-            //     title: "City Damage Reporter",
-            //     user: user,
-            //     css: "style_user_main.css",
-            //     script: "user_main.js",
-            //     hideAuthButton: false
-            // });
             res.redirect('/user_main');
         } else {
-            res.status(400).send('User already exists');
+            res.render('signup', {
+                title: "City Damage Reporter",
+                css: "style_login_user.css",
+                script: "signup_user.js",
+                hideAuthButton: true,
+                error: 'User already exists'
+            });
         }
     } catch (error) {
         console.error('Error signing up user:', error);
@@ -111,7 +121,8 @@ export async function showUserMain(req, res) {
         const user = req.session.user;
         const reports = await model.getUserReports(user.user_phone);
 
-        res.render('user_main', {reports: reports,
+        res.render('user_main', {
+            reports: reports,
             title: "City Damage Reporter",
             user: user,
             css: "style_user_main.css",

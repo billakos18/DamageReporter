@@ -2,6 +2,17 @@
     <div class="signup-container">
         <h2>Στοιχεία Εγγραφής</h2>
         <form action="/signup" method="POST">
+            <div id="name-input" class="input-group">
+                <div>
+                <label id="first-name-label" for="first-name">Όνομα</label>
+                <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div class="last-name-class">
+                <label id="last-name-label" for="last-name">Επώνυμο</label>
+                <input type="text" id="last-name" name="last-name" required>
+                </div>
+            </div>
+            
             <div class="input-group">
                 <label id="email-signup-label" for="email-signup">Email</label>
                 <input type="email" id="email-signup" name="email-signup" required>
@@ -21,6 +32,10 @@
             <div class="signup-btn-container">
                 <button type="submit" class="signup-btn">Εγγραφή</button>
             </div>
+            <div style="padding-top: 10px;">
+                {{#if error}}
+                    <label style="color:red;" class="error-message">{{error}}</label>
+                {{/if}}
         </form>
         <a href="/login" class="login-link">Έχεις ήδη λογαριασμό;</a>
     </div>

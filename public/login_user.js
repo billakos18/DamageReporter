@@ -25,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
             reports: "Αναφορές",
             contact: "Επικοινωνία",
             h2: "Είσοδος Χρήστη",
+            username: "Email ή Κινητό",
             password: "Κωδικός",
             login: "Είσοδος",
             register: "Δεν έχεις λογαριασμό;",
@@ -34,6 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
             reports: "Reports",
             contact: "Contact",
             h2: "User Login",
+            username: "Email or Phone Number",
             password: "Password",
             login: "Login",
             register: "Don't have an account?",
@@ -50,6 +52,7 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector(".header_opt:nth-child(2)").textContent = t.reports;
             document.querySelector(".header_opt:nth-child(3)").textContent = t.contact;
             document.querySelector(".login-container h2").textContent = t.h2;
+            document.querySelector("#username-label").textContent = t.username;
             document.querySelector("#password-login-label").textContent = t.password;
             document.querySelector(".login-btn").textContent = t.login;
             document.querySelector(".register-link").textContent = t.register;

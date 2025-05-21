@@ -25,6 +25,8 @@ window.addEventListener('DOMContentLoaded', () => {
             reports: "Αναφορές",
             contact: "Επικοινωνία",
             signup_h2: "Στοιχεία Εγγραφής",
+            first_name: "Όνομα",
+            last_name: "Επώνυμο",
             signup_email: "Email",
             signup_phone: "Κινητό Τηλέφωνο",
             signup_password: "Κωδικός",
@@ -37,6 +39,8 @@ window.addEventListener('DOMContentLoaded', () => {
             reports: "Reports",
             contact: "Contact",
             signup_h2: "Sign Up",
+            first_name: "First Name",
+            last_name: "Last Name",
             signup_email: "Email",
             signup_phone: "Phone Number",
             signup_password: "Password",
@@ -55,6 +59,8 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector(".header_opt:nth-child(2)").textContent = t.reports;
             document.querySelector(".header_opt:nth-child(3)").textContent = t.contact;
             document.querySelector(".signup-container h2").textContent = t.signup_h2;
+            document.querySelector("#first-name-label").textContent = t.first_name;
+            document.querySelector("#last-name-label").textContent = t.last_name;
             document.querySelector("#email-signup-label").textContent = t.signup_email;
             document.querySelector("#phone-signup-label").textContent = t.signup_phone;
             document.querySelector("#password-signup-label").textContent = t.signup_password;
@@ -78,10 +84,13 @@ window.addEventListener('DOMContentLoaded', () => {
     if (startFlag) startFlag.click();
 });
 
-document.querySelector(".signup-btn").addEventListener("click", () => {
+const form = document.querySelector('form');
+form.addEventListener('submit', (event) => {
+    const password = document.querySelector('#password-signup').value;
+    const rePassword = document.querySelector('#password-signup-check').value;
 
-    if (document.querySelector('#password-signup').value !== document.querySelector('#password-signup-check').value) {
-        console.log('no')
+    if (password !== rePassword) {
+        event.preventDefault();
+        alert('Passwords do not match.');
     }
-
-})
+});

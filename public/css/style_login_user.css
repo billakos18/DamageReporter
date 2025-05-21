@@ -175,6 +175,19 @@ section{
     text-decoration: underline;
 }
 
+#name-input{
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+#name-input input{
+    width: 100%
+}
+#name-input div{
+    flex: 1;
+}
+
 #gr:hover, #eng:hover {
     cursor: pointer;
 }

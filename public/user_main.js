@@ -77,11 +77,3 @@ window.addEventListener('DOMContentLoaded', () => {
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });
-
-document.querySelector(".signup-btn").addEventListener("click", () => {
-
-    if (document.querySelector('#password-signup').value !== document.querySelector('#password-signup-check').value) {
-        console.log('no')
-    }
-
-})
