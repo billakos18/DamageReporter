@@ -2,6 +2,7 @@ import express from 'express'
 const router = express.Router();
 
 import dotenv from 'dotenv'
+import { checkAuthentication } from '../controller/login_controller.mjs';
 if (process.env.NODE_ENV !== 'production') {
     console.log('loading .env')
     dotenv.config();
@@ -17,6 +18,7 @@ router.get('/report', damagesController.reportDamage);
 router.get('/login', loginController.showLogin);
 router.get('/signup', loginController.showSignup);
 router.get('/recentReports', damagesController.showRecentReports);
+router.get('/user_main', loginController.checkAuthentication, loginController.showUserMain);
 
 router.post('/login', loginController.loginUser)
 router.post('/signup', loginController.signupUser);

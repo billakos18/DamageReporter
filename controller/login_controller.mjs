@@ -39,15 +39,16 @@ export async function loginUser(req, res) {
 
         if (user) {
             req.session.user = user;
-            const reports = await model.getUserReports(user.user_phone);
+            // const reports = await model.getUserReports(user.user_phone);
 
-            res.render('user_main', {reports: reports,
-                title: "City Damage Reporter",
-                user: user,
-                css: "style_user_main.css",
-                script: "user_main.js",
-                hideAuthButton: false
-            });
+            // res.render('user_main', {reports: reports,
+            //     title: "City Damage Reporter",
+            //     user: user,
+            //     css: "style_user_main.css",
+            //     script: "user_main.js",
+            //     hideAuthButton: false
+            // });
+            res.redirect('/user_main');
         } else {
             res.status(401).send('Invalid email or password');
         }
@@ -62,14 +63,16 @@ export async function signupUser(req, res) {
     try {
         const user = await model.registerUser(email, mobile, password);
         if (user) {
-            const reports = await model.getUserReports(user.user_phone);
-            res.render('user_main', {reports: reports,
-                title: "City Damage Reporter",
-                user: user,
-                css: "style_user_main.css",
-                script: "user_main.js",
-                hideAuthButton: false
-            });
+            req.session.user = user;
+            // const reports = await model.getUserReports(user.user_phone);
+            // res.render('user_main', {reports: reports,
+            //     title: "City Damage Reporter",
+            //     user: user,
+            //     css: "style_user_main.css",
+            //     script: "user_main.js",
+            //     hideAuthButton: false
+            // });
+            res.redirect('/user_main');
         } else {
             res.status(400).send('User already exists');
         }
@@ -86,6 +89,7 @@ export async function logoutUser(req, res) {
                 console.error('Error destroying session:', err);
                 return res.status(500).send('Internal Server Error');
             }
+            res.clearCookie('connect.sid'); // Clear the session cookie
             res.redirect('/login');
         });
     } catch (error) {
@@ -95,3 +99,27 @@ export async function logoutUser(req, res) {
 }
 
 
+export async function checkAuthentication(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+}
+export async function showUserMain(req, res) {
+    try {
+        const user = req.session.user;
+        const reports = await model.getUserReports(user.user_phone);
+
+        res.render('user_main', {reports: reports,
+            title: "City Damage Reporter",
+            user: user,
+            css: "style_user_main.css",
+            script: "user_main.js",
+            hideAuthButton: false
+        });
+    } catch (error) {
+        console.error('Error rendering user main page:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}
