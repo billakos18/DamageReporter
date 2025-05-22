@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
             home: "Home",
             reports: "Reports",
             contact: "Contact",
-            signin: "Sign In/Sign Up",
+            signin: "Sign In / Register",
             signout: "Sign Out",
         }
     }
