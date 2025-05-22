@@ -24,6 +24,8 @@
     transition: background 0.3s ease, color 0.3s ease;
 }
 body {
+    margin:0;
+    padding:0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--c1);
     color: var(--text);
@@ -31,80 +33,10 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
-header {
-    background: var(--c2);
-    padding: 1.23rem 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    /* padding-left: 0; */
-}
 
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.header_opt {
-    color: var(--text);
-    margin: 0 1rem;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.header_opt:hover {
-    color: var(--c4);
-}
-
-.header_right {
-    display: flex;
-    align-items: center;
-}
-
-.toggle {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    aspect-ratio: 2/1;
-    margin-right: 1rem;
-}
-
-.toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    inset: 0;
-    background-color: #ccc;
-    border-radius: 99px;
-    cursor: pointer;
-    transition: background-color 0.4s;
-}
-.slider::before{
-    position: absolute;
-    content: "";
-    height: 90%;
-    width: 45%;
-    left: 5%;
-    right: 5%;
-    top: 5%;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
-input:checked + .slider{
-    background-color: #605f5f;
-}
-input:focus + .slider{
-    box-shadow: 0 0 1px #605f5f;
-}
-input:checked + .slider::before{
-    transform: translateX(90%);
-}
+img{
+    margin-bottom: 6px;
+  }
 
 .user-home {
     background: url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover;
@@ -122,6 +54,7 @@ input:checked + .slider::before{
   flex-wrap: wrap;
   max-width: 1200px;
   width: 100%;
+  align-items: flex-start
 }
 
 .left-panel {
@@ -130,7 +63,6 @@ input:checked + .slider::before{
   border-radius: 10px;
   flex: 1;
   min-width: 300px;
-  max-height: 250px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   color: var(--text);
   text-align: center;
@@ -204,6 +136,9 @@ footer {
     color: var(--text);
     padding: 1rem;
     text-align: center;
+}
+footer p {
+    margin: 0;
 }
 
 

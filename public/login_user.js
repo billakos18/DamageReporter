@@ -29,6 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
             password: "Κωδικός",
             login: "Είσοδος",
             register: "Δεν έχεις λογαριασμό;",
+            error: "Λανθασμένα στοιχεία"
         },
         en: {
             home: "Home",
@@ -39,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
             password: "Password",
             login: "Login",
             register: "Don't have an account?",
-
+            error: "Invalid credentials"
         }
     };
 
@@ -57,6 +58,10 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector(".login-btn").textContent = t.login;
             document.querySelector(".register-link").textContent = t.register;
 
+            const errLabel = document.querySelector(".error-message");
+            if(errLabel) {
+                errLabel.textContent = t.error;
+            }
 
             el.lang = lang;
             if (el.lang === "en") {
@@ -69,6 +74,10 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('lang', lang)
         });
     });
+    // const errLabel = document.querySelector(".error-message");
+    // if (errLabel){
+    //     errLabel.textContent = errLabel.dataset[savedLang]; 
+    // }
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });

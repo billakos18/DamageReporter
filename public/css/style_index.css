@@ -33,80 +33,7 @@
     min-height: 100vh;
   }
 
-  header {
-    background: var(--c2);
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* padding-left: 0; */
-  }
 
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .header_opt {
-    color: var(--text);
-    margin: 0 1rem;
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .header_opt:hover {
-    color: var(--c4);
-  }
-
-  .header_right {
-    display: flex;
-    align-items: center;
-  }
-
-  .toggle {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    aspect-ratio: 2/1;
-    margin-right: 1rem;
-  }
-
-  .toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .slider {
-    position: absolute;
-    inset: 0;
-    background-color: #ccc;
-    border-radius: 99px;
-    cursor: pointer;
-    transition: background-color 0.4s;
-  }
-  .slider::before {
-    position: absolute;
-    content: "";
-    height: 90%;
-    width: 45%;
-    left: 5%;
-    right: 5%;
-    top: 5%;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-  }
-  input:checked + .slider {
-    background-color: #605f5f;
-  }
-  input:focus + .slider {
-    box-shadow: 0 0 1px #605f5f;
-  }
-  input:checked + .slider::before {
-    transform: translateX(90%);
-  }
   .sign-in-btn {
     background: var(--c4);
     color: white;
@@ -115,6 +42,9 @@
     border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
+  }
+  img{
+    margin-bottom: 6px;
   }
 
   .hero {

@@ -21,6 +21,9 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
 }
+img{
+    margin-bottom: 6px;
+  }
 
 .header_opt {
     color: var(--text);

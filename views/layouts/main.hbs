@@ -59,5 +59,20 @@
     <footer>
         <p>&copy; 2025 City Damage Reporter | Keeping Our City Safe</p>
     </footer>
+
+    {{#if user}}
+    <script>
+      window.user = {{{json user}}};
+    </script>
+    {{/if}}
+    
+    {{!-- Prevent caching and force reload after logging out --}}
+    <script>
+      window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+          window.location.reload();
+        }
+      });
+    </script>
   </body>
 </html>

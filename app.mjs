@@ -27,7 +27,7 @@ app.engine('hbs', engine({
     layoutsDir: 'views/layouts',
     helpers: { // Custom helpers
         json: (context) => {
-            JSON.stringify(context)
+             return JSON.stringify(context)
             },
         formatDate: (dateString, formatStr = 'PPpp') => {
             return format(new Date(dateString), formatStr);
@@ -37,7 +37,10 @@ app.engine('hbs', engine({
     }
 }));
 app.set('view engine', 'hbs');
-
+// app.use((req,res,next) => {
+//     res.set('Cache-Control', 'no-store');
+//     next();
+// })
 // Use routes
 app.use('/', damagesRoutes);
 

@@ -46,7 +46,11 @@ export async function loginUser(req, res) {
                 css: "style_login_user.css",
                 script: "login_user.js",
                 hideAuthButton: true,
-                error: 'Invalid username or password'
+                // error: {
+                //     en: "Invalid credentials",
+                //     gr: "Λανθασμένα στοιχεία"
+                // }
+                error: true
             });
         }
     } catch (error) {
@@ -56,13 +60,13 @@ export async function loginUser(req, res) {
 }
 
 export async function signupUser(req, res) {
-
     const firstname = req.body['first-name'];
     const lastname = req.body['last-name'];
     const email = req.body['email-signup'];
     const mobile = req.body['phone-signup'];
     const password = req.body['password-signup'];
     try {
+        // Check if the user already exists
         const existingUser = await model.getUser(mobile, email);
         if (existingUser) {
             return res.render('signup', {
@@ -70,9 +74,15 @@ export async function signupUser(req, res) {
                 css: "style_login_user.css",
                 script: "signup_user.js",
                 hideAuthButton: true,
-                error: 'User already exists'
+                // error: {
+                //     en: 'User already exists',
+                //     gr: "Ο χρήστης υπάρχει ήδη"
+                // }
+                error: true
             });
         }
+
+        // Check if the user was registered successfully
         const user = await model.registerUser(email, mobile, password, firstname, lastname);
         if (user) {
             req.session.user = user;
@@ -83,7 +93,7 @@ export async function signupUser(req, res) {
                 css: "style_login_user.css",
                 script: "signup_user.js",
                 hideAuthButton: true,
-                error: 'User already exists'
+                error: true
             });
         }
     } catch (error) {
@@ -120,11 +130,14 @@ export async function showUserMain(req, res) {
     try {
         const user = req.session.user;
         const reports = await model.getUserReports(user.user_phone);
+        res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.set('Pragma', 'no-cache');
+        res.set('Expires', '0');
 
         res.render('user_main', {
             reports: reports,
             title: "City Damage Reporter",
-            user: user,
+            user: req.session.user,
             css: "style_user_main.css",
             script: "user_main.js",
             hideAuthButton: false

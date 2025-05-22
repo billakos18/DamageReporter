@@ -44,6 +44,7 @@ export async function findUserByUsernamePassword(username, password){
             return 
         }
         return {
+            user_id: res.rows[0].user_id,
             user_first_name: res.rows[0].user_first_name,
             user_last_name: res.rows[0].user_last_name,
             user_email: res.rows[0].user_email,
@@ -55,36 +56,36 @@ export async function findUserByUsernamePassword(username, password){
 }
 
 export async function registerUser(email, mobile, password, firstName, lastName) {
-    const userId = getUser(mobile, email);
-    if(!userId) {
-        console.log("User already exists:", userId);
-        return {}
-    } else {
-        let idQuery = "SELECT count(user_id) FROM \"User\""
-        let query = "INSERT INTO \"User\" (user_id, user_email, user_password, user_phone, user_first_name, user_last_name) VALUES ($1, $2, $3, $4, $5, $6)";
-        try {
-            const hashedPass = await argon2.hash(password, 10);
-            const resCount = await client.query(idQuery);
-            const userId = parseInt(resCount.rows[0].count) + 1;
-            const res = await client.query(query, [userId, email, hashedPass, mobile, firstName, lastName]);
-            if (res){
-                const user = {
-                    user_id: userId,
-                    user_email: email,
-                    user_password: hashedPass,
-                    user_phone: mobile,
-                    user_first_name: firstName,
-                    user_last_name: lastName
-                }
-                return user;
-            } else{
-                alert("Internal database error")
-                return {}
+    // const userId = getUser(mobile, email);
+    // console.log("Ti ston peonta:", userId);
+    // if(!userId) {
+    //     console.log("User already exists:", userId);
+    //     return {}
+    // } else {
+    let idQuery = "SELECT count(user_id) FROM \"User\""
+    let query = "INSERT INTO \"User\" (user_id, user_email, user_password, user_phone, user_first_name, user_last_name) VALUES ($1, $2, $3, $4, $5, $6)";
+    try {
+        const hashedPass = await argon2.hash(password, 10);
+        const resCount = await client.query(idQuery);
+        const newId = parseInt(resCount.rows[0].count) + 1;
+        const res = await client.query(query, [newId, email, hashedPass, mobile, firstName, lastName]);
+        if (res){
+            const user = {
+                user_id: newId,
+                user_email: email,
+                user_phone: mobile,
+                user_first_name: firstName,
+                user_last_name: lastName
             }
-        } catch(err){
-            throw err;
+            return user;
+        } else{
+            alert("Internal database error")
+            return {}
         }
+    } catch(err){
+        throw err;
     }
+    
 }
 
 export async function getUser(phone, email) {

@@ -32,7 +32,8 @@ window.addEventListener('DOMContentLoaded', () => {
             signup_password: "Κωδικός",
             signup_repassword: "Επαλήθευση Κωδικού",
             signup_btn: "Εγγραφή",
-            signup_register: "Έχεις ήδη λογαριασμό;"
+            signup_register: "Έχεις ήδη λογαριασμό;",
+            error: "Ο χρήστης υπάρχει ήδη"
         },
         en: {
             home: "Home",
@@ -47,6 +48,7 @@ window.addEventListener('DOMContentLoaded', () => {
             signup_repassword: "Re-enter Password",
             signup_btn: "Sign Up",
             signup_register: "Already have an account?",
+            error: "User already exists"
         }
     };
 
@@ -67,6 +69,11 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector("#reenter-password-singup-label").textContent = t.signup_repassword;
             document.querySelector(".signup-btn").textContent = t.signup_btn;
             document.querySelector(".login-link").textContent = t.signup_register;
+
+            const errLabel = document.querySelector(".error-message");
+            if(errLabel) {
+                errLabel.textContent = t.error;
+            }
 
             el.lang = lang;
             // document.querySelector("#")

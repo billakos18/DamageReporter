@@ -25,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
             reports: "Αναφορές",
             contact: "Επικοινωνία",
             logout: "Έξοδος",
-            left_panel_header: "Καλώς ήρθες",
+            left_panel_header: "Καλώς ήρθες " + user.user_first_name,
             left_panel_par: "Είσαι έτοιμος να καταγράψεις ένα νέο πρόβλημα;",
             report_btn: "Αναφορά Προβλήματος",
             right_panel_header: "Οι Αναφορές Μου",
@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
             reports: "Reports",
             contact: "Contact",
             logout: "Logout",
-            left_panel_header: "Welcome",
+            left_panel_header: "Welcome " + user.user_first_name,
             left_panel_par: "Are you ready to report a new issue for your city?",
             report_btn: "Report an Issue",
             right_panel_header: "My Reports",
@@ -77,3 +77,5 @@ window.addEventListener('DOMContentLoaded', () => {
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });
+
+
