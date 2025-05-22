@@ -22,6 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
         reports: "Αναφορές",
         contact: "Επικοινωνία",
         signin: "Είσοδος/Εγγραφή",
+        signout: "Έξοδος",
         police: {
         title: "Αστυνομία",
         text: [
@@ -69,6 +70,7 @@ window.addEventListener('DOMContentLoaded', () => {
         reports: "Reports",
         contact: "Contact",
         signin: "Sign In / Register",
+        signout: "Logout",
         police: {
         title: "Police Dept.",
         text: [
@@ -121,7 +123,16 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.header_opt:nth-child(1)').textContent = t.home;
         document.querySelector('.header_opt:nth-child(2)').textContent = t.reports;
         document.querySelector('.header_opt:nth-child(3)').textContent = t.contact;
+        // 
+        // if user is logged in
+        const signout_btn = document.querySelector('.sign-out-btn');
+        if (signout_btn) {
+        signout_btn.textContent = t.signout;
+        }
+        // if user is not logged in
+        else {
         document.querySelector('.sign-in-btn').textContent = t.signin;
+        }
 
         [
         {id: 'police', data: t.police},
