@@ -95,6 +95,7 @@ export async function getUser(phone, email) {
         let res = await client.query(query_phone, [phone]);
         if(res.rows.length === 0){
             res = await client.query(query_email, [email]);
+            
         }
         return res.rows[0];
     } catch(err){
@@ -103,12 +104,15 @@ export async function getUser(phone, email) {
     
 }
 
-export async function addReport(type, description, street, number, area, pcode, userPhone) {
-    let query = "INSERT INTO \"Report\" (report_id, report_type, report_description, report_date, report_street, report_street_number, report_area, report_pcode, report_latitude, report_longitude, report_status, user_phone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
+export async function addReport(type, description, street, number, area, pcode, latitude, longitude, userPhone, photo) {
+    let idQuery = "SELECT count(report_id) FROM \"Report\""
+    let query = "INSERT INTO \"Report\" (report_id, report_type, report_description, report_date, report_street, report_street_number, report_area, report_pcode, report_latitude, report_longitude, report_status, user_phone, report_photo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)";
     try {
+        const resCount = await client.query(idQuery);
+        const newId = parseInt(resCount.rows[0].count) + 1;
         const date = new Date();
-        const res = await client.query(query, [1, type, description, date, street, number, area, pcode, "testlat", "testlon", "received", userPhone]);
-        return res.rows[0];
+        const res = await client.query(query, [newId, type, description, date, street, number, area, pcode, parseFloat(latitude), parseFloat(longitude), "received", userPhone, photo]);
+        return res;
     } catch(err) {
         throw err;
     }

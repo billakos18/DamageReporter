@@ -1,6 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+import multer from 'multer';
+
+const upload = multer({ storage: multer.memoryStorage() });
+
+
 const model = await import(`../model/damages_model.mjs`);
 
 export async function showHome(req, res) {
@@ -80,3 +85,50 @@ export async function showRecentReports(req, res) {
     }
 }
 
+export async function addReport(req, res) {
+    try {
+
+        console.log(req.body);
+        // console.log(req.file?.buffer);
+        // type, description, street, number, area, pcode, latitude, longitude, userPhone, photo
+        const {
+            street,
+            'street-number': streetNumber,
+            'postal-code': postalCode,
+            area,
+            latitude,
+            longitude, // this was misspelled as "longtitude"
+            damage: type, // "damage" is the actual name in the form
+            comments,
+            mobile // "modile" is the field name in the form
+            } = req.body;
+
+        const result = await model.addReport(
+            type,
+            comments,
+            street,
+            streetNumber,
+            area,
+            postalCode,
+            latitude,
+            longitude,
+            mobile,
+            req.file?.buffer
+        );
+        if (result) {
+            console.log("Report added successfully:", result);
+            res.redirect('/recentReports');
+        } else {
+            console.log("Failed to add report");
+            res.status(500).send('Failed to add report');
+        }
+   
+        // const userId = req.session.user.user_id;
+        // const reportDate = new Date();
+        // await model.addReport(report_type, report_latitude, report_longitude, report_status, userId, reportDate);
+        // res.redirect('/recentReports');
+    } catch (error) {
+        console.error('Error adding report:', error);
+        res.status(500).send('Internal Server Error');
+    }
+}

@@ -74,6 +74,8 @@ document.getElementById("use-location-btn").addEventListener("click", async () =
             document.getElementById("street").value = address.road || '';
             document.getElementById("street-number").value = address.house_number || '';
             document.getElementById("postal-code").value = address.postcode || '';
+            document.getElementById("longitude").value = selectedCoords.lng;
+            document.getElementById("latitude").value = selectedCoords.lat;
         } else {
             alert("Δεν ήταν δυνατός ο εντοπισμός διεύθυνσης.");
         }
@@ -92,15 +94,17 @@ document.querySelector(".current-loc-btn").addEventListener("click", () => {
             } else {
                 marker = L.marker([lat, lon]).addTo(map).bindPopup("Είσαι εδώ").openPopup();
             }
-            selectedCoords = { lat: lat, lgn: lon }
+            selectedCoords = { lat: lat, lng: lon }
             // Fill form with address
             if (selectedCoords) {
                 console.log('Current location found, reverse geocoding...');
-                const address = await reverseGeocode(selectedCoords.lat, selectedCoords.lgn);
+                const address = await reverseGeocode(selectedCoords.lat, selectedCoords.lng);
                 if (address) {
                     document.getElementById("street").value = address.road || '';
                     document.getElementById("street-number").value = address.house_number || '';
                     document.getElementById("postal-code").value = address.postcode || '';
+                    document.getElementById("longitude").value = selectedCoords.lng;
+                    document.getElementById("latitude").value = selectedCoords.lat;
                 } else {
                     alert("Δεν ήταν δυνατός ο εντοπισμός διεύθυνσης.")
                 }
@@ -153,27 +157,27 @@ document.querySelector('#previous-btn-w2').addEventListener('click', () => {
     document.querySelector('#wizard-step-2').style.display = "none";
 })
 
-document.querySelector('#next-btn-w2').addEventListener('click', () => {
-    // const form = document.querySelector('#wizard-step-1 form');
+// document.querySelector('#next-btn-w2').addEventListener('click', () => {
+//     // const form = document.querySelector('#wizard-step-1 form');
 
-    // if (!form.checkValidity()) {
-    //     form.reportValidity(); // this shows native browser errors + red borders
-    //     return;
-    // }
-    const damageSelect = document.querySelector("#damage");
-    if (!damageSelect.checkValidity()) {
-        damageSelect.reportValidity();
-        return;
-    }
+//     // if (!form.checkValidity()) {
+//     //     form.reportValidity(); // this shows native browser errors + red borders
+//     //     return;
+//     // }
+//     const damageSelect = document.querySelector("#damage");
+//     if (!damageSelect.checkValidity()) {
+//         damageSelect.reportValidity();
+//         return;
+//     }
 
-    document.querySelector('#wizard-step-2').style.display = "none";
-    document.querySelector('#wizard-step-3').style.display = "block";
-});
+//     document.querySelector('#wizard-step-2').style.display = "none";
+//     document.querySelector('#wizard-step-3').style.display = "block";
+// });
 
-document.querySelector('#previous-btn-w3').addEventListener('click', () => {
-    document.querySelector('#wizard-step-2').style.display = "block";
-    document.querySelector('#wizard-step-3').style.display = "none";
-});
+// document.querySelector('#previous-btn-w3').addEventListener('click', () => {
+//     document.querySelector('#wizard-step-2').style.display = "block";
+//     document.querySelector('#wizard-step-3').style.display = "none";
+// });
 
 const toggle = document.querySelector('#theme-toggle');
 const header = document.querySelector('header');
@@ -235,15 +239,16 @@ const texts = {
         step2_comments: "Σχόλια",
         step2_comments_label: "Αναφέρετε σχόλια σχετικά με την βλάβη",
         step2_images: "Φωτογραφία (προαιρετική)",
+        step2_phone: "Κινητό",
         step2_previous_btn: "Προηγούμενο",
-        step2_next_btn: "Επόμενο",
+        step2_report: "Δήλωση"
 
-        step3_h2: "Πληροφορίες Επικοινωνίας",
-        step3_firstname: "Όνομα",
-        step3_lastname: "Επώνυμο",
-        step3_phone: "Κινητό",
-        step3_previous_btn: "Προηγούμενο",
-        step3_report: "Δήλωση"
+        // step3_h2: "Πληροφορίες Επικοινωνίας",
+        // step3_firstname: "Όνομα",
+        // step3_lastname: "Επώνυμο",
+        // step3_phone: "Κινητό",
+        // step3_previous_btn: "Προηγούμενο",
+        // step3_report: "Δήλωση"
 
     },
     en: {
@@ -285,15 +290,16 @@ const texts = {
         step2_comments: "Comments",
         step2_comments_label: "Please provide comments about the damage",
         step2_images: "Image (optional)",
+        step2_phone: "Mobile",
         step2_previous_btn: "Previous",
-        step2_next_btn: "Next",
+        step2_report: "Report"
 
-        step3_h2: "Contact Information",
-        step3_firstname: "Name",
-        step3_lastname: "Last Name",
-        step3_phone: "Mobile",
-        step3_previous_btn: "Previous",
-        step3_report: "Report"
+        // step3_h2: "Contact Information",
+        // step3_firstname: "Name",
+        // step3_lastname: "Last Name",
+        // step3_phone: "Mobile",
+        // step3_previous_btn: "Previous",
+        // step3_report: "Report"
     }
 };
 
@@ -332,15 +338,16 @@ document.querySelectorAll(".lang-flag").forEach(flag => {
         document.querySelector("#wizard-step-2 #comments-label").textContent = t.step2_comments;
         document.querySelector("#wizard-step-2 #comments").placeholder = t.step2_comments_label;
         document.querySelector("#wizard-step-2 #image-label").textContent = t.step2_images;
+        document.querySelector("#wizard-step-2 #mobile-label").textContent = t.step2_phone;
         document.querySelector("#previous-btn-w2").textContent = t.step2_previous_btn;
-        document.querySelector("#next-btn-w2").textContent = t.step2_next_btn;
+        document.querySelector("#report-btn-w2").textContent = t.step2_report;
 
-        document.querySelector("#wizard-step-3 h2").textContent = t.step3_h2;
-        document.querySelector("#wizard-step-3 #first-name-label").textContent = t.step3_firstname;
-        document.querySelector("#wizard-step-3 #last-name-label").textContent = t.step3_lastname;
-        document.querySelector("#wizard-step-3 #mobile-label").textContent = t.step3_phone;
-        document.querySelector("#previous-btn-w3").textContent = t.step3_previous_btn;
-        document.querySelector("#report-btn-w3").textContent = t.step3_report;
+        // document.querySelector("#wizard-step-3 h2").textContent = t.step3_h2;
+        // document.querySelector("#wizard-step-3 #first-name-label").textContent = t.step3_firstname;
+        // document.querySelector("#wizard-step-3 #last-name-label").textContent = t.step3_lastname;
+        // document.querySelector("#wizard-step-3 #mobile-label").textContent = t.step3_phone;
+        // document.querySelector("#previous-btn-w3").textContent = t.step3_previous_btn;
+        // document.querySelector("#report-btn-w3").textContent = t.step3_report;
 
         el.lang = lang;
         // document.querySelector("#")

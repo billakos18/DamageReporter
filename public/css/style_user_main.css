@@ -23,6 +23,14 @@
     box-sizing: border-box;
     transition: background 0.3s ease, color 0.3s ease;
 }
+.sign-out-btn{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-size: 0.9rem;
+
+}
 body {
     margin:0;
     padding:0;
@@ -129,6 +137,9 @@ img{
 
 #gr:hover, #eng:hover, .sign-out-btn:hover {
     cursor: pointer;
+}
+.sign-out-btn:hover {
+    background: #3282B8;
 }
 
 footer {
