@@ -74,10 +74,6 @@ export async function signupUser(req, res) {
                 css: "style_login_user.css",
                 script: "signup_user.js",
                 hideAuthButton: true,
-                // error: {
-                //     en: 'User already exists',
-                //     gr: "Ο χρήστης υπάρχει ήδη"
-                // }
                 error: true
             });
         }
@@ -119,13 +115,7 @@ export async function logoutUser(req, res) {
 }
 
 
-export async function checkAuthentication(req, res, next) {
-    if (req.session.user) {
-        next();
-    } else {
-        res.redirect('/login');
-    }
-}
+
 export async function showUserMain(req, res) {
     try {
         const user = req.session.user;

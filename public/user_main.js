@@ -25,6 +25,9 @@ window.addEventListener('DOMContentLoaded', () => {
             reports: "Αναφορές",
             contact: "Επικοινωνία",
             logout: "Έξοδος",
+            signout_message: "Αποσύνδεση;",
+            signout_confirm: "Ναι",
+            signout_cancel: "Όχι",
             left_panel_header: "Καλώς ήρθες " + user.user_first_name,
             left_panel_par: "Είσαι έτοιμος να καταγράψεις ένα νέο πρόβλημα;",
             report_btn: "Αναφορά Προβλήματος",
@@ -37,6 +40,9 @@ window.addEventListener('DOMContentLoaded', () => {
             reports: "Reports",
             contact: "Contact",
             logout: "Logout",
+            signout_message: "Logout?",
+            signout_confirm: "Yes",
+            signout_cancel: "No",
             left_panel_header: "Welcome " + user.user_first_name,
             left_panel_par: "Are you ready to report a new issue for your city?",
             report_btn: "Report an Issue",
@@ -60,7 +66,9 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector(".right-panel h2").textContent = t.right_panel_header;
             const msgEl = document.querySelector("#no-reports-msg");
             if (msgEl) msgEl.textContent = t.right_panel_par;
-            
+            document.querySelector('#Signout-msg').textContent = t.signout_message;
+            document.querySelector('#Confirm-signout-btn').textContent = t.signout_confirm;
+            document.querySelector('#Cancel-signout-btn').textContent = t.signout_cancel;
 
             el.lang = lang;
             // document.querySelector("#")

@@ -26,8 +26,8 @@ export async function getRecentReports(){
 }
 
 export async function findUserByUsernamePassword(username, password){
-    let query_email = "SELECT user_first_name, user_last_name, user_email, user_phone, user_password FROM \"User\" WHERE user_email = $1 LIMIT 1";
-    let query_phone = "SELECT user_first_name, user_last_name, user_email, user_phone, user_password FROM \"User\" WHERE user_phone = $1 LIMIT 1";
+    let query_email = "SELECT user_id, user_first_name, user_last_name, user_email, user_phone, user_password FROM \"User\" WHERE user_email = $1 LIMIT 1";
+    let query_phone = "SELECT user_id, user_first_name, user_last_name, user_email, user_phone, user_password FROM \"User\" WHERE user_phone = $1 LIMIT 1";
     try{
         let res = await client.query(query_email, [username]);
         if(res.rows.length === 0){
@@ -56,12 +56,6 @@ export async function findUserByUsernamePassword(username, password){
 }
 
 export async function registerUser(email, mobile, password, firstName, lastName) {
-    // const userId = getUser(mobile, email);
-    // console.log("Ti ston peonta:", userId);
-    // if(!userId) {
-    //     console.log("User already exists:", userId);
-    //     return {}
-    // } else {
     let idQuery = "SELECT count(user_id) FROM \"User\""
     let query = "INSERT INTO \"User\" (user_id, user_email, user_password, user_phone, user_first_name, user_last_name) VALUES ($1, $2, $3, $4, $5, $6)";
     try {
@@ -89,14 +83,46 @@ export async function registerUser(email, mobile, password, firstName, lastName)
 }
 
 export async function getUser(phone, email) {
-    let query_phone = "SELECT user_id FROM \"User\" WHERE user_phone = $1";
-    let query_email = "SELECT user_id FROM \"User\" WHERE user_email = $1";
+    // let query_phone = "SELECT user_id FROM \"User\" WHERE user_phone = $1";
+    let query = "SELECT user_id FROM \"User\" WHERE user_phone = $1 OR user_email = $2";
+    // let query_email = "SELECT user_id FROM \"User\" WHERE user_email = $1";
     try{
-        let res = await client.query(query_phone, [phone]);
-        if(res.rows.length === 0){
-            res = await client.query(query_email, [email]);
+        // let res = await client.query(query_phone, [phone]);
+        // if(res.rows.length === 0){
+        //     res = await client.query(query_email, [email]);
             
-        }
+        // }
+        let res = await client.query(query, [phone, email]);
+        return res.rows[0];
+    } catch(err){
+        throw err;
+    }
+    
+}
+
+export async function getUserByPhone(phone) {
+    // let query_phone = "SELECT user_id FROM \"User\" WHERE user_phone = $1";
+    let query = "SELECT user_id FROM \"User\" WHERE user_phone = $1";
+    // let query_email = "SELECT user_id FROM \"User\" WHERE user_email = $1";
+    try{
+        // let res = await client.query(query_phone, [phone]);
+        // if(res.rows.length === 0){
+        //     res = await client.query(query_email, [email]);
+            
+        // }
+        let res = await client.query(query, [phone]);
+        return res.rows[0];
+    } catch(err){
+        throw err;
+    }
+    
+}
+
+export async function getUserByEmail(email) {
+
+    let query = "SELECT user_id FROM \"User\" WHERE user_email = $1";
+    try{
+        let res = await client.query(query, [email]);
         return res.rows[0];
     } catch(err){
         throw err;
@@ -106,12 +132,12 @@ export async function getUser(phone, email) {
 
 export async function addReport(type, description, street, number, area, pcode, latitude, longitude, userPhone, photo) {
     let idQuery = "SELECT count(report_id) FROM \"Report\""
-    let query = "INSERT INTO \"Report\" (report_id, report_type, report_description, report_date, report_street, report_street_number, report_area, report_pcode, report_latitude, report_longitude, report_status, user_phone, report_photo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)";
+    let query = "INSERT INTO \"Report\" (report_type, report_description, report_date, report_street, report_street_number, report_area, report_pcode, report_latitude, report_longitude, report_status, user_phone, report_photo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
     try {
         const resCount = await client.query(idQuery);
         const newId = parseInt(resCount.rows[0].count) + 1;
         const date = new Date();
-        const res = await client.query(query, [newId, type, description, date, street, number, area, pcode, parseFloat(latitude), parseFloat(longitude), "received", userPhone, photo]);
+        const res = await client.query(query, [type, description, date, street, number, area, pcode, parseFloat(latitude), parseFloat(longitude), "received", userPhone, photo]);
         return res;
     } catch(err) {
         throw err;
@@ -119,7 +145,7 @@ export async function addReport(type, description, street, number, area, pcode, 
 }
 
 export async function getUserReports(userPhone) {
-    let query = "SELECT report_type, to_char(report_date, 'YYYY-MM-DD HH24:MI:SS') as report_date, report_latitude, report_longitude, report_status, report_street, report_street_number, report_area FROM \"Report\" WHERE user_phone = $1";
+    let query = "SELECT report_id, report_type, to_char(report_date, 'YYYY-MM-DD HH24:MI:SS') as report_date, report_latitude, report_longitude, report_status, report_street, report_street_number, report_area FROM \"Report\" WHERE user_phone = $1";
     try {
         const res = await client.query(query, [userPhone]);
         return res.rows;
@@ -127,14 +153,57 @@ export async function getUserReports(userPhone) {
         throw err;
     }
 }
-// export async function addReport(wiz1, lat, long, type, description){
-//     try{
-//         const res = await client.query(`INSERT INTO \"Report\" (report_id, report_type, report_description, report_date, report_street, report_street_number, report_area, report_pcode, report_latitude, report_longitude, report_status, user_phone)
-//             VALUES ($1, $2, $3, $4, $5, $6)`,
-//             [1, 'Flood', 'Heavy rain caused flooding in the area', '2023-10-01', wiz1[0], wiz1[1], wiz1[3], wiz1[2], 40.7128, -74.0060, 'in progress', '1234567890'])
-        
-//     }
-//     catch (err) {
-//         console.error('Error inserting data into PostgreSQL database:', err);
-//     }
-// }
+
+export async function deleteReport(reportId) {
+    let query = "DELETE FROM \"Report\" WHERE report_id = $1";
+    try {
+        const res = await client.query(query, [reportId]);
+        return res;
+    } catch(err) {
+        throw err;
+    }
+}
+
+export async function editStatus(reportId, status) {
+    let query = "UPDATE \"Report\ SET report_status = $1 WHERE report_id = $2";
+    try{
+        const res = await client.query(query, [status, reportId]);
+        return res;
+    } catch(err){
+        throw err;
+    }
+}
+export async function updateUserInfo(userId, firstName, lastName, email, phone, password) {
+    if (password === "" || password == null) {
+        // If password is not provided, update only the other fields
+        let query = "UPDATE \"User\" SET user_first_name = $1, user_last_name = $2, user_email = $3, user_phone = $4 WHERE user_id = $5";
+        try {
+            const res = await client.query(query, [firstName, lastName, email, phone, userId]);
+            return res;
+        } catch(err) {
+            throw err;
+    }
+    }
+    else{
+        // If password is provided, hash it and update all fields
+        let hashedPass = await argon2.hash(password, 10);
+        let query = "UPDATE \"User\" SET user_first_name = $1, user_last_name = $2, user_email = $3, user_phone = $4, user_password = $5 WHERE user_id = $6";
+        try {
+            const res = await client.query(query, [firstName, lastName, email, phone, hashedPass, userId]);
+            return res;
+        } catch(err) {
+            throw err;
+        }
+    }
+    
+}
+
+export async function editReportPhone(oldPhone, newPhone) {
+    let query = "UPDATE \"Report\" SET user_phone = $1 WHERE user_phone = $2";
+    try {
+        const res = await client.query(query, [newPhone, oldPhone]);
+        return res;
+    } catch(err) {
+        throw err;
+    }
+}

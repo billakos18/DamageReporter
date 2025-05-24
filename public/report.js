@@ -334,6 +334,10 @@ document.querySelectorAll(".lang-flag").forEach(flag => {
         options.forEach((opt, index) => {
             opt.textContent = t.damage_options[index];
         });
+        for (let i = 0; i < options.length; i++) {
+            options[i].value = t.damage_options[i];
+        }
+
         document.querySelector('#damage option[disabled][selected]').textContent = t.step2_type_label;
         document.querySelector("#wizard-step-2 #comments-label").textContent = t.step2_comments;
         document.querySelector("#wizard-step-2 #comments").placeholder = t.step2_comments_label;
@@ -342,15 +346,7 @@ document.querySelectorAll(".lang-flag").forEach(flag => {
         document.querySelector("#previous-btn-w2").textContent = t.step2_previous_btn;
         document.querySelector("#report-btn-w2").textContent = t.step2_report;
 
-        // document.querySelector("#wizard-step-3 h2").textContent = t.step3_h2;
-        // document.querySelector("#wizard-step-3 #first-name-label").textContent = t.step3_firstname;
-        // document.querySelector("#wizard-step-3 #last-name-label").textContent = t.step3_lastname;
-        // document.querySelector("#wizard-step-3 #mobile-label").textContent = t.step3_phone;
-        // document.querySelector("#previous-btn-w3").textContent = t.step3_previous_btn;
-        // document.querySelector("#report-btn-w3").textContent = t.step3_report;
-
         el.lang = lang;
-        // document.querySelector("#")
         if (el.lang === "en") {
             document.querySelector("#gr").style.display = "block";
             document.querySelector("#eng").style.display = "none";

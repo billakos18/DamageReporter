@@ -23,6 +23,9 @@ window.addEventListener('DOMContentLoaded', () => {
         contact: "Επικοινωνία",
         signin: "Είσοδος/Εγγραφή",
         signout: "Έξοδος",
+        signout_message: "Αποσύνδεση;",
+        signout_confirm: "Ναι",
+        signout_cancel: "Όχι",
         police: {
         title: "Αστυνομία",
         text: [
@@ -71,6 +74,9 @@ window.addEventListener('DOMContentLoaded', () => {
         contact: "Contact",
         signin: "Sign In / Register",
         signout: "Logout",
+        signout_message: "Logout?",
+        signout_confirm: "Yes",
+        signout_cancel: "No",
         police: {
         title: "Police Dept.",
         text: [
@@ -123,11 +129,14 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.header_opt:nth-child(1)').textContent = t.home;
         document.querySelector('.header_opt:nth-child(2)').textContent = t.reports;
         document.querySelector('.header_opt:nth-child(3)').textContent = t.contact;
-        // 
+
         // if user is logged in
         const signout_btn = document.querySelector('.sign-out-btn');
         if (signout_btn) {
         signout_btn.textContent = t.signout;
+        document.querySelector('#Signout-msg').textContent = t.signout_message;
+        document.querySelector('#Confirm-signout-btn').textContent = t.signout_confirm;
+        document.querySelector('#Cancel-signout-btn').textContent = t.signout_cancel;
         }
         // if user is not logged in
         else {
