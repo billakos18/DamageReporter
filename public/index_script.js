@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", () => {
       el: {
         home: "Αρχική",
         reports: "Αναφορές",
-        contact: "Επικοινωνία",
+        contact: "Χρήσιμα",
         signin: "Είσοδος/Εγγραφή",
         signout: "Έξοδος",
         headline: "Είδες κάτι; Ανέφερε το.",

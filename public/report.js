@@ -246,7 +246,7 @@ const texts = {
     el: {
         home: "Αρχική",
         reports: "Αναφορές",
-        contact: "Επικοινωνία",
+        contact: "Χρήσιμα",
         signin: "Είσοδος/Εγγραφή",
         signout: "Έξοδος",
         h2: "Δήλωση Βλάβης",
@@ -327,6 +327,7 @@ const texts = {
             "Prosfigika",
             "Skagiopoulio",
             "Terpsithea",
+            "Psila Alonia",
             "Other"
         ],
         current_loc_btn: "Current Location",

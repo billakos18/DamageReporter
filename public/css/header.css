@@ -189,8 +189,8 @@ img{
 
 
 .header_right {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .toggle {
@@ -246,4 +246,50 @@ input:checked + .slider::before{
 
 #settings-btn:hover {
   cursor: pointer;
+}
+
+@media (max-width: 360px) {
+  nav {
+    transform: scale(0.85);
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .header_right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .sign-in-btn {
+    transform: scale(0.85);
+    text-align: center;
+    width: 100%;
+  }
+
+}
+
+@media (min-width: 412px) and (max-width: 450px) {
+
+  .nav-left {
+    max-width: 150px;
+  }
+
+}
+
+@media (min-width: 361px) and (max-width: 411px) {
+
+  header{
+    padding-right: 20px;
+  }
+  .nav-left {
+    max-width: 130px;
+    max-height: 70px;
+  }
+  .header_opt {
+    text-align: left;
+    margin-right: 0;
+  }
+
+  .header_right{
+    transform: scale(0.85);
+  }
 }

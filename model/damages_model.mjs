@@ -3,12 +3,12 @@ import argon2 from 'argon2';
 
 // Create a new PostgreSQL client instance
 const client = new Client({
-  host: 'localhost',
-  port: 5432,                // default Postgres port
-  user: 'postgres',          // your DB user
-  password: 'nikolas2003', // your DB password
-  database: 'damage_report_database', // your database name
+  connectionString: 'postgresql://damage_reporter_database_user:6hEVXqguu9vCkGto8PVahfxTlb0VOux6@dpg-d0q9tmjipnbc73e6dl10-a.frankfurt-postgres.render.com/damage_reporter_database',
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
+
 
 // Connect to the PostgreSQL database
 try{
