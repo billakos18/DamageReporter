@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
         el: {
             home: "Αρχική",
             reports: "Αναφορές",
-            contact: "Επικοινωνία",
+            contact: "Χρήσιμα",
             h2: "Είσοδος Χρήστη",
             username: "Email ή Κινητό",
             password: "Κωδικός",

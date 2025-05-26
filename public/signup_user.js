@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
         el: {
             home: "Αρχική",
             reports: "Αναφορές",
-            contact: "Επικοινωνία",
+            contact: "Χρήσιμα",
             signup_h2: "Στοιχεία Εγγραφής",
             first_name: "Όνομα",
             last_name: "Επώνυμο",

@@ -246,7 +246,7 @@ const texts = {
     el: {
         home: "Αρχική",
         reports: "Αναφορές",
-        contact: "Επικοινωνία",
+        contact: "Χρήσιμα",
         signin: "Είσοδος/Εγγραφή",
         signout: "Έξοδος",
         h2: "Δήλωση Βλάβης",
