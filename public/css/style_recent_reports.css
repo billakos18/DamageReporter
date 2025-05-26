@@ -1,0 +1,257 @@
+html{
+    height:100%;
+    /* font-size: clamp(14px, 1vw, 18px); */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+
+.sign-in-btn {
+    background: var(--c4);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    /* justify-content: center; */
+}
+:root {
+    --c1: #f8f9fa;
+    --c2: #ffffff;
+    --c3: #e9ecef;
+    --c4: rgb(64, 64, 176);
+    --text: #212529;
+    --glass: rgba(256,256,256,0.5)
+}
+
+.dark-mode {
+    --c1: #121212;
+    --c2: #1f1f1f;
+    --c3: #2c2c2c;
+    --c4: rgb(64, 64, 176);
+    --text: #E6EDF3;
+    --glass: rgba(0,0,0,0.85)
+
+}
+.sign-out-btn{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    font-size: 0.9rem;
+
+}
+
+body {
+    margin:0;
+    padding:0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--c1);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+img{
+    margin-bottom: 6px;
+  }
+.wizard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 100%;
+    height: 85vh;
+    position: relative;
+}
+
+iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 0;
+}
+
+#image{
+    padding: 7px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    width: fit-content;
+}
+#image::-webkit-file-upload-button {
+    background: var(--c4);
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+
+#gr:hover, #eng:hover {
+    cursor: pointer;
+}
+.login-btn:hover, .sign-out-btn:hover {
+    background: #3282B8;
+    cursor: pointer;
+}
+
+footer {
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
+    background: var(--c2);
+    color: var(--text);
+    padding: 1rem;
+    text-align: center;
+}
+footer p{
+    margin: 0;
+}
+/* Small screens (phones) */
+
+/* @media (max-height: 570px) {
+    .wizard{
+       transform: translate(-50%, -50%) scale(0.45);
+    }  
+} */
+@media (max-height: 730px) {
+    .wizard{
+       transform: translate(-50%, -50%) scale(0.85);
+    }
+}
+@media (max-width: 670px) {
+    .input-group{
+        width: 100%;
+    }
+}
+@media (max-width: 600px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .toggle {
+        margin: 1rem 0;
+    }
+
+    .sign-in-btn,
+    .next-btn,
+    .choose-loc-btn,
+    .previous-btn,
+    .use-location-btn,
+    #report-btn-w3 {
+        width: 100%;
+        position: static;
+        margin-top: 10px;
+    }
+
+    .input-group {
+        width: 100%;
+    }
+    
+    /* .wizard-container{
+        height: auto;
+        padding-top: 80px;
+    } */
+
+    .wizard {
+        width: 90%;
+        aspect-ratio: unset;
+        padding-top: 80px;
+        /* max-height: 70%; */
+        padding: 20px;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    #wizard-step-3 .input-group {
+        width: 100%;
+    }
+
+    input#image {
+        box-sizing: border-box;
+    }
+}
+
+/* Medium screens (tablets and small laptops) */
+@media (max-width: 900px) {
+    nav {
+        padding: 0 1rem;
+    }
+
+    .wizard {
+        width: 90%;
+    }
+
+    .next-btn,
+    .choose-loc-btn,
+    .previous-btn,
+    #report-btn-w3 {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    .input-group input,
+    .input-group select {
+        font-size: 0.95em;
+    }
+}
+
+/* Larger screens */
+@media (min-width: 1200px) {
+    .wizard {
+        width: min(70%, 700px);
+    }
+
+    .next-btn,
+    .choose-loc-btn,
+    .previous-btn,
+    #report-btn-w3 {
+        font-size: 1em;
+    }
+}
+.row, nav{
+    flex-wrap: wrap;
+}
+
+@media (max-width: 780px) {
+    nav {
+      transform: scale(0.85);
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    header{
+        padding: 0;
+    }
+    .header_right {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .nav_left{
+        transform: scale(0.85);
+    }
+    .sign-in-btn {
+      transform: scale(0.85);
+      text-align: center;
+      width: 100%;
+    }
+}

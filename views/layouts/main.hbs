@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Pragma" content="no-cache">
     <title>{{title}}</title>
     {{!-- <link rel="stylesheet" href="{{stylesheet}}"> --}}
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/{{css}}">
-    {{!-- {{#each css}}
-      <link rel="stylesheet" href="/css/{{this}}">
-    {{/each}} --}}
+    {{#if user}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{/if}}
     {{#if map}}
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -22,7 +23,7 @@
       <nav>
         <div class="nav-left">
             <a href="/" class="header_opt">Αρχική</a>
-            <a href="/reports" class="header_opt">Αναφορές</a>
+            <a href="/recentReports" class="header_opt">Αναφορές</a>
             <a href="/communication" class="header_opt">Επικοινωνία</a>
         </div>
         <div class="header_right">
@@ -39,10 +40,43 @@
             {{#unless hideAuthButton}}
             {{!-- CASE 2: Logged in --}}
             {{#if user}}
-                <span class="username-label">{{user.username}}</span>
-                <form action="/logout" method="POST" style="display:inline;">
-                <button type="submit" class="sign-out-btn">Έξοδος</button>
-                </form>
+                <!-- Logout Button -->
+                <div style="position: relative; display: inline-block;">
+                  <button type="button" class="sign-out-btn" onclick="toggleLogoutPopup(event)">Έξοδος</button>
+
+                  <!-- Confirmation Popup -->
+                  <div id="logoutPopup" class="logout-popup">
+                    <p id="Signout-msg">Αποσύνδεση;</p>
+                    <div class="logout-btn-group">
+                      <button id="Confirm-signout-btn" class="sign-out-btn" onclick="submitLogout()">Ναι</button>
+                      <button id="Cancel-signout-btn" class="sign-out-btn" onclick="hideLogoutPopup()">Όχι</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Hidden Logout Form -->
+                <form id="logoutForm" action="/logout" method="POST" style="display: none;"></form>
+
+                <div id="settingsOverlay" class="settings-overlay" style="display: none;">
+                  <div class="settings-content">
+                    <h2>Ρυθμίσεις</h2>
+                    <form id="settingsForm" action="/user_main/settings" method="POST">
+                      <label>Όνομα: <input type="text" id="firstName" name="firstName" /></label>
+                      <label>Επώνυμο: <input type="text" id="lastName" name="lastName" /></label>
+                      <label>Email: <input type="email" id="email" name="email" /></label>
+                      <label>Τηλέφωνο: <input type="tel" id="phone" name="phone" /></label>
+                      <label>Νέος Κωδικός: <input type="password" id="password" name="password" /></label>
+                      <label>Επιβεβαίωση Νέου Κωδικού: <input type="password" id="confirmPassword" name="confirmPassword" /></label>
+                      <label id="errorLabel" style="display: flex; color: red;"></label>
+                      <div class="settings-buttons">
+                        <button type="button" onclick="closeSettingsModal()">Ακύρωση</button>
+                        <button type="submit">Αποθήκευση</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <button id="settings-btn" class="settings-btn" onclick="toggleSettingsPopup()">⚙️</button>
+
 
             {{!-- CASE 3: Not logged in --}}
             {{else}}
@@ -59,5 +93,14 @@
     <footer>
         <p>&copy; 2025 City Damage Reporter | Keeping Our City Safe</p>
     </footer>
+
+    {{!-- Prevent caching and force reload after logging out --}}
+    {{#if user}}
+    <script>
+      window.user = {{{json user}}};
+    </script>
+    <script src="/main.js"></script>
+    {{/if}}
   </body>
+  
 </html>

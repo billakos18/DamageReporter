@@ -1,8 +1,15 @@
+let selectedCoords = null;
+let marker;
 
-// Login User page script
+// Create the map
+const map = L.map('map', { attributionControl: false }).setView([38.2466, 21.7346], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+}).addTo(map);
+
 window.addEventListener('DOMContentLoaded', () => {
 
-    // Theme toggle functionality
+    // Toggle theme (dark/light mode)
     const toggle = document.querySelector('#theme-toggle');
     const header = document.querySelector('header');
     const body = document.body;
@@ -23,34 +30,30 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Language toggle functionality
+    // Toggle language (greek/english)
     const el = document.documentElement;
-
-    // Define the texts for each language
     const texts = {
         el: {
             home: "Αρχική",
             reports: "Αναφορές",
             contact: "Επικοινωνία",
-            h2: "Είσοδος Χρήστη",
-            username: "Email ή Κινητό",
-            password: "Κωδικός",
-            login: "Είσοδος",
-            register: "Δεν έχεις λογαριασμό;",
-            error: "Λανθασμένα στοιχεία"
+            signin: "Είσοδος/Εγγραφή",
+            signout: "Έξοδος",
+            signout_message: "Αποσύνδεση;",
+            signout_confirm: "Ναι",
+            signout_cancel: "Όχι"
         },
         en: {
             home: "Home",
             reports: "Reports",
             contact: "Contact",
-            h2: "User Login",
-            username: "Email or Phone Number",
-            password: "Password",
-            login: "Login",
-            register: "Don't have an account?",
-            error: "Invalid credentials"
+            signin: "Sign In / Register",
+            signout: "Logout",
+            signout_message: "Logout?",
+            signout_confirm: "Yes",
+            signout_cancel: "No"
         }
-    };
+    }
 
     // Set initial language based on localStorage or default to Greek
     const savedLang = localStorage.getItem('lang') || 'el';
@@ -63,19 +66,20 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector(".header_opt:nth-child(1)").textContent = t.home;
             document.querySelector(".header_opt:nth-child(2)").textContent = t.reports;
             document.querySelector(".header_opt:nth-child(3)").textContent = t.contact;
-            document.querySelector(".login-container h2").textContent = t.h2;
-            document.querySelector("#username-label").textContent = t.username;
-            document.querySelector("#password-login-label").textContent = t.password;
-            document.querySelector(".login-btn").textContent = t.login;
-            document.querySelector(".register-link").textContent = t.register;
-
-            // Update error message if it exists
-            const errLabel = document.querySelector(".error-message");
-            if(errLabel) {
-                errLabel.textContent = t.error;
+            // if user is logged in
+            const signout_btn = document.querySelector(".sign-out-btn");
+            if (signout_btn) {
+                signout_btn.textContent = t.signout;
+                document.querySelector('#Signout-msg').textContent = t.signout_message;
+                document.querySelector('#Confirm-signout-btn').textContent = t.signout_confirm;
+                document.querySelector('#Cancel-signout-btn').textContent = t.signout_cancel;
             }
-            
-            // Set the document language
+            // if user is not logged in
+            else{
+                document.querySelector(".sign-in-btn").textContent = t.signin;
+            }
+
+            // Toggle flag visibility
             el.lang = lang;
             if (el.lang === "en") {
                 document.querySelector("#gr").style.display = "block";
@@ -84,14 +88,27 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.querySelector("#gr").style.display = "none";
                 document.querySelector("#eng").style.display = "block";
             }
+
+            // Save language in local storage
             localStorage.setItem('lang', lang)
         });
     });
-
+        
     // Trigger click on the saved language flag, match the system language
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });
 
 
+// Show recent reports on the map as markers
+if (window.reports) {
+    window.reports.forEach(report => {
+        const marker = L.marker([report.report_latitude, report.report_longitude]).addTo(map);
+        marker.bindPopup(`
+            <strong>${report.report_type}</strong><br>
+            ${report.report_date}<br>
+            status: ${report.report_status}<br>
+        `);
+    });
 
+}

@@ -1,27 +1,25 @@
 <section class="background">
-    <div class="login-container">
-        <h2>Είσοδος Χρήστη</h2>
-        <form action="#" method="POST">
-            <div class="input-group">
-                <label for="email-login">Email</label>
-                <input type="email" id="email-login" name="email-login" required>
-            </div>
-            <div class="input-group">
-                <label id="password-login-label" for="password-login">Κωδικός</label>
-                <input type="password" id="password-login" name="password-login" required>
-            </div>
-            <div class="login-btn-container">
-                <button type="submit" class="login-btn">Είσοδος</button>
-            </div>
-        </form>
-        <a href="#" class="register-link">Δεν έχεις λογαριασμό;</a>
-    </div>
-    <div class="signup-container"   style="display:none">
+    <div class="signup-container">
         <h2>Στοιχεία Εγγραφής</h2>
-        <form action="#" method="POST">
+        <form action="/signup" method="POST">
+            <div id="name-input" class="input-group">
+                <div>
+                <label id="first-name-label" for="first-name">Όνομα</label>
+                <input type="text" id="first-name" name="first-name" required>
+                </div>
+                <div class="last-name-class">
+                <label id="last-name-label" for="last-name">Επώνυμο</label>
+                <input type="text" id="last-name" name="last-name" required>
+                </div>
+            </div>
+            
             <div class="input-group">
-                <label id="email-signup-label" for="email-signup">Email ή Κινητό</label>
+                <label id="email-signup-label" for="email-signup">Email</label>
                 <input type="email" id="email-signup" name="email-signup" required>
+            </div>
+            <div class="input-group">
+                <label id="phone-signup-label" for="phone-signup">Κινητό</label>
+                <input type="tel" id="phone-signup" name="phone-signup" pattern="^69\d{8}$" maxlength="10" required>
             </div>
             <div class="input-group">
                 <label id="password-signup-label" for="password-signup">Κωδικός</label>
@@ -32,9 +30,16 @@
                 <input type="password" id="password-signup-check" name="password-signup-check" required>
             </div>
             <div class="signup-btn-container">
-                <button type="button" class="signup-btn">Εγγραφή</button>
+                <button type="submit" class="signup-btn">Εγγραφή</button>
+            </div>
+            <div style="padding-top: 10px;">
+                {{#if error}}
+                    <label id="erroLabel" style="color:red;" class="error-message">{{error}}</label>
+                {{else}}
+                    <label id="errorLabel" style="color:red;" class="error-message" style="display: none;"></label>
+                {{/if}}
             </div>
         </form>
-        <a href="#" class="login-link">Έχεις ήδη λογαριασμό;</a>
+        <a href="/login" class="login-link">Έχεις ήδη λογαριασμό;</a>
     </div>
 </section>

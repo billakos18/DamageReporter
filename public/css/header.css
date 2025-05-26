@@ -7,11 +7,129 @@
     text-decoration: none;
     font-weight: 600;
 }
+.logout-popup {
+    
+    position: absolute;
+    top: 110%; /* below the button */
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    border-radius: 6px;
+    min-width: 120px;
+    text-align: center;
+    display: none; /* Initially hidden */
+    color: black;
+}
+
+.logout-popup button {
+  margin: 5px 3px;
+  padding: 5px 10px;
+  font-size: 0.9em;
+}
+.logout-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem; /* space between buttons */
+  margin-top: 0.5rem;
+}
+
+.logout-btn-group .sign-out-btn {
+  flex: 1;
+  min-width: 60px;
+  padding: 0.4rem 0.8rem;
+}
+/* ---------------- Settings Modal Overlay --------------------- */
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Slightly dimmed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  max-width: 100%;
+}
+
+/* Modal Box */
+.settings-content {
+  background: var(--c2); /* Match header background */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Match header style */
+  min-width: 300px;
+  max-width: 90%;
+  color: var(--text); /* Match text color */
+  font-family: inherit;
+}
+
+/* Modal Heading */
+.settings-content h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-size: 1.5rem;
+}
+
+/* Form Fields */
+.settings-content label {
+  display: block;
+  margin: 0.5rem 0 0.3rem;
+  font-weight: 500;
+}
+
+.settings-content input {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  background: white;
+  color: #333;
+}
+
+/* Button Container */
+.settings-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+/* Buttons */
+.settings-buttons button {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Cancel Button */
+.settings-buttons button:first-child {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Save Button */
+.settings-buttons button:last-child {
+  background-color: var(--c4); /* Match header button */
+  color: white;
+}
+/*  */
 
 header {
     background: var(--c2);
     padding: 1rem 2rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1000;
 }
 
 nav {
@@ -22,7 +140,14 @@ nav {
     margin: 0 auto;
 }
 
-.header_opt {
+.nav-left{
+  box-sizing: border-box;
+}
+img{
+    margin-bottom: 6px;
+  }
+
+/* .header_opt {
     color: var(--text);
     margin: 0 1rem;
     text-decoration: none;
@@ -31,7 +156,37 @@ nav {
 
 .header_opt:hover {
     color: var(--c4);
+} */
+
+.header_opt {
+  color: var(--text);
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
 }
+
+.header_opt::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--c4); 
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.header_opt:hover::after {
+  transform: scaleX(1);
+}
+
+.header_opt:hover {
+  color: var(--c4);
+}
+
 
 .header_right {
     display: flex;
@@ -80,4 +235,15 @@ input:focus + .slider{
 }
 input:checked + .slider::before{
     transform: translateX(90%);
+}
+
+#settings-btn{
+  background: transparent; 
+  border: 0; 
+  font-size: 24px;
+  padding-left: 5px;
+}
+
+#settings-btn:hover {
+  cursor: pointer;
 }

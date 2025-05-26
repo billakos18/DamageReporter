@@ -1,0 +1,139 @@
+<section class="user-home">
+  <div class="user-container">
+
+    <!-- Welcome and report container -->
+    <div class="left-panel">
+      <h2>Καλώς Ήρθες! {{escape user.user_first_name}}</h2>
+      <p>Είσαι έτοιμος να καταγράψεις ένα νέο πρόβλημα;</p>
+      <a href="/report" class="report-btn">Αναφορά Προβλήματος</a>
+    </div>
+
+    {{!-- Users Reports --}}
+    <div class="right-panel">
+      <h2>Οι Αναφορές Μου</h2>
+        <div class="report-list">
+        {{#if reports}}
+          {{#each reports}}
+                    {{#if (eq this.report_status "rejected")}}
+                      <div class="report-item" style="background-color: #f82536;">
+                        <div>
+                            <h4>{{this.report_type}}</h4>
+                            <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                            <p>Rejected - Απορρίφθηκε</p>
+                          </div>
+                          <div class="actionbtn">
+                          <div class="menu-wrapper">
+                            <p class="menu-toggle">⋯</p>
+                            <ul class="dropdown-menu">
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
+                            </ul>
+                          </div>
+                            <a href="/user_main/delete/{{this.report_id}}"><i class="fa fa-trash-o" id="delete-btn1"></i></a>
+                          </div>
+                      </div>
+                    {{else}}
+                      {{#if (eq this.report_status "in progress")}}
+                        <div class="report-item" style="background-color: #ffab66;">
+                          <div>
+                            <h4>{{this.report_type}}</h4>
+                            <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                            <p>In progress - Σε εξέλιξη</p>
+                          </div>
+                          <div class="actionbtn">
+                            <div class="menu-wrapper">
+                              <p class="menu-toggle">⋯</p>
+                              <ul class="dropdown-menu">
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
+                              </ul>
+                            </div>
+                            <a href="/user_main/delete/{{this.report_id}}" style="pointer-events: none;"><i class="fa fa-trash-o" style="font-size:24px; color:gray;"></i></a>
+                          </div>
+                        </div>
+                      {{else}}
+                        {{#if (eq this.report_status "completed")}}
+                          <div class="report-item" style="background-color: #1dd18c;">
+                            <div>
+                              <h4>{{this.report_type}}</h4>
+                              <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                              <p>Completed - Ολοκληρωμένο</p>
+                            </div>
+                            <div class="actionbtn">
+                              <div class="menu-wrapper">
+                                <p class="menu-toggle">⋯</p>
+                                <ul class="dropdown-menu">
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
+                                </ul>
+                              </div>
+                              <a href="/user_main/delete/{{this.report_id}}"  style="pointer-events: none;"><i class="fa fa-trash-o" style="font-size:24px; color:gray;"></i></a>
+                            </div>
+                          </div>
+                        {{else}}
+                          {{#if (eq this.report_status "approved")}}
+                            <div class="report-item" style="background-color: #a3559a;">
+                              <div>
+                                <h4>{{this.report_type}}</h4>
+                                <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                                <p>Approved - Εγκρίθηκε</p>
+                              </div>
+                              <div class="actionbtn">
+                                <div class="menu-wrapper">
+                                  <p class="menu-toggle">⋯</p>
+                                  <ul class="dropdown-menu">
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
+                                  </ul>
+                                </div>
+                                <a href="/user_main/delete/{{this.report_id}}"  style="pointer-events: none;"><i class="fa fa-trash-o" style="font-size:24px; color:gray;"></i></a>
+                              </div>
+                            </div>
+                          {{else}}
+                            {{#if (eq this.report_status "received")}}
+                              <div class="report-item">
+                                <div>
+                                  <h4>{{this.report_type}}</h4>
+                                  <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                                  <p>Received - Παραλήφθηκε</p>
+                                </div>
+                                <div class="actionbtn">
+                                  <div class="menu-wrapper">
+                                    <p class="menu-toggle">⋯</p>
+                                    <ul class="dropdown-menu">
+                                      <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
+                                      <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
+                                      <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
+                                      <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
+                                      <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
+                                    </ul>
+                                  </div>
+                                  {{!-- <p>...</p> --}}
+                                  <a href="/user_main/delete/{{this.report_id}}"><i class="fa fa-trash-o" id="delete-btn2"></i></a>
+                                </div>
+                              </div>
+                            {{/if}}
+                          {{/if}}
+                        {{/if}}
+                      {{/if}}
+                    {{/if}}
+          {{/each}}
+        {{else}}
+          <p id="no-reports-msg">Δεν έχετε υποβάλει αναφορές ακόμα.</p>
+        {{/if}} 
+        </div>
+    </div>
+</section>
+

@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS User(
+CREATE TABLE IF NOT EXISTS "User"(
     user_id INT PRIMARY KEY,
     user_email VARCHAR(100) NOT NULL UNIQUE,
     user_password VARCHAR(255) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS User(
     user_last_name VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Report(
+CREATE TABLE IF NOT EXISTS "Report"(
     report_id INT PRIMARY KEY,
     report_type VARCHAR(255) NOT NULL,
     report_description TEXT NOT NULL,
