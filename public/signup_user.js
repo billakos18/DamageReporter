@@ -1,4 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
+
+    // Theme toggle (dark/light mode)
     const toggle = document.querySelector('#theme-toggle');
     const header = document.querySelector('header');
     const body = document.body;
@@ -18,6 +20,8 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', 'light');
         }
     });
+
+    // Language toggle (greek/english)
     const el = document.documentElement;
     const texts = {
         el: {
@@ -33,7 +37,6 @@ window.addEventListener('DOMContentLoaded', () => {
             signup_repassword: "Επαλήθευση Κωδικού",
             signup_btn: "Εγγραφή",
             signup_register: "Έχεις ήδη λογαριασμό;",
-            error: "Ο χρήστης υπάρχει ήδη"
         },
         en: {
             home: "Home",
@@ -48,11 +51,13 @@ window.addEventListener('DOMContentLoaded', () => {
             signup_repassword: "Re-enter Password",
             signup_btn: "Sign Up",
             signup_register: "Already have an account?",
-            error: "User already exists"
         }
     };
 
-    const savedLang = localStorage.getItem('lang') || 'el';
+    // Set initial language based on localStorage or default to Greek
+    const savedLang = localStorage.getItem('lang') || 'el'; 
+
+    // Modify text based on language
     document.querySelectorAll(".lang-flag").forEach(flag => {
         flag.addEventListener("click", () => {
             const lang = flag.dataset.lang;
@@ -69,14 +74,9 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector("#reenter-password-singup-label").textContent = t.signup_repassword;
             document.querySelector(".signup-btn").textContent = t.signup_btn;
             document.querySelector(".login-link").textContent = t.signup_register;
-
-            const errLabel = document.querySelector(".error-message");
-            if(errLabel) {
-                errLabel.textContent = t.error;
-            }
-
+            
+            // Toggle flag visibility
             el.lang = lang;
-            // document.querySelector("#")
             if (el.lang === "en") {
                 document.querySelector("#gr").style.display = "block";
                 document.querySelector("#eng").style.display = "none";
@@ -84,13 +84,17 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.querySelector("#gr").style.display = "none";
                 document.querySelector("#eng").style.display = "block";
             }
+
+            // Save language in local storage
             localStorage.setItem('lang', lang)
         });
     });
+
+    // Trigger click on the saved language flag, match the system language
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });
-
+ // Check if passwords match
 const form = document.querySelector('form');
 form.addEventListener('submit', (event) => {
     const password = document.querySelector('#password-signup').value;
@@ -98,6 +102,8 @@ form.addEventListener('submit', (event) => {
 
     if (password !== rePassword) {
         event.preventDefault();
-        alert('Passwords do not match.');
+        const errorlabel = document.querySelector('#errorLabel');
+        errorlabel.textContent = 'Passwords do not match';
+        errorlabel.style.display = 'block'; // Display error
     }
 });

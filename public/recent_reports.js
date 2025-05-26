@@ -1,12 +1,15 @@
 let selectedCoords = null;
 let marker;
 
+// Create the map
 const map = L.map('map', { attributionControl: false }).setView([38.2466, 21.7346], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
 }).addTo(map);
 
 window.addEventListener('DOMContentLoaded', () => {
+
+    // Toggle theme (dark/light mode)
     const toggle = document.querySelector('#theme-toggle');
     const header = document.querySelector('header');
     const body = document.body;
@@ -26,6 +29,8 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', 'light');
         }
     });
+
+    // Toggle language (greek/english)
     const el = document.documentElement;
     const texts = {
         el: {
@@ -50,7 +55,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Set initial language based on localStorage or default to Greek
     const savedLang = localStorage.getItem('lang') || 'el';
+
+    // Modify text based on language
     document.querySelectorAll(".lang-flag").forEach(flag => {
         flag.addEventListener("click", () => {
             const lang = flag.dataset.lang;
@@ -71,8 +79,8 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.querySelector(".sign-in-btn").textContent = t.signin;
             }
 
+            // Toggle flag visibility
             el.lang = lang;
-            // document.querySelector("#")
             if (el.lang === "en") {
                 document.querySelector("#gr").style.display = "block";
                 document.querySelector("#eng").style.display = "none";
@@ -80,9 +88,13 @@ window.addEventListener('DOMContentLoaded', () => {
                 document.querySelector("#gr").style.display = "none";
                 document.querySelector("#eng").style.display = "block";
             }
+
+            // Save language in local storage
             localStorage.setItem('lang', lang)
         });
     });
+        
+    // Trigger click on the saved language flag, match the system language
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });
@@ -95,7 +107,7 @@ if (window.reports) {
         marker.bindPopup(`
             <strong>${report.report_type}</strong><br>
             ${report.report_date}<br>
-            ${report.report_status}<br>
+            status: ${report.report_status}<br>
         `);
     });
 

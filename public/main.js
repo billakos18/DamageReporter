@@ -1,3 +1,8 @@
+
+// Main layout script
+
+// Prevent the back button from navigating back
+// Force page to reload, not fetch from cache
 window.addEventListener('pageshow', function(event) {
         if (event.persisted) {
         window.location.reload();
@@ -5,28 +10,31 @@ window.addEventListener('pageshow', function(event) {
     });
 
 // ---------- Logout popup functions ----------
-let currentPopup = null;
+let currentPopup = null; // Variable to keep track of the currently open popup
 
+// Function to toggle the logout popup, attached to the logout button
 function toggleLogoutPopup(event) {
     event.stopPropagation(); // Prevent this click from bubbling to document
 
-    const popup = event.currentTarget.nextElementSibling;
+    const popup = event.currentTarget.nextElementSibling; // Get the next sibling element which is the popup
 
     // If this popup is already open, toggle it
     if (popup.style.display === "block") {
     popup.style.display = "none";
     currentPopup = null;
-    } else {
+    } else { // If this popup is not open, show it
+
     // Close any other open popup
     if (currentPopup) {
         currentPopup.style.display = "none";
     }
-
+    // Show the popup
     popup.style.display = "block";
     currentPopup = popup;
     }
 }
 
+// Function to hide the logout popup, called when clicking no on the popup
 function hideLogoutPopup() {
     if (currentPopup) {
     currentPopup.style.display = "none";
@@ -34,6 +42,7 @@ function hideLogoutPopup() {
     }
 }
 
+// Function to submit the logout form, called when clicking yes on the popup
 function submitLogout() {
     document.getElementById("logoutForm").submit();
 }
@@ -47,13 +56,15 @@ document.addEventListener("click", function(event) {
 // ----------- End of logout popup functions ----------
 
 // ---------- Settings pop functions ----------
+
+// Function to toggle the settings popup, attached to the settings button
 function toggleSettingsPopup() {
     const modal = document.getElementById("settingsOverlay");
     modal.style.display = "flex";
     populateSettingsForm(); // Populate the form with user data
-    console.log(user);
 }
 
+// Function to close the settings modal, called when clicking the cancel button
 function closeSettingsModal() {
     document.getElementById("settingsOverlay").style.display = "none";
     document.getElementById("errorLabel").style.display = "none"; // Hide error label
@@ -83,15 +94,10 @@ function populateSettingsForm() {
 // To check if the phone number is alreaedy registered
 // Its commented out 
 
-window.addEventListener('pageshow', function(event) {
-    if (event.persisted) {
-    window.location.reload();
-    }
-});
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('#settingsForm');
+
+    // When form is submitted, validate passwords and send data
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
@@ -99,8 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rePassword = document.querySelector('#confirmPassword').value;
         const errorLabel = document.querySelector('#errorLabel');
 
-        console.log(password, rePassword);
-
+        // Check if passwords match
         if (password !== rePassword) {
             
             errorLabel.textContent = 'Οι κωδικοί δεν ταιριάζουν.';
@@ -108,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Data object thats has user data and gets sent to the server
         const data = {
             firstName: document.querySelector('#firstName').value,
             lastName: document.querySelector('#lastName').value,
@@ -115,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
             phone: document.querySelector('#phone').value,
             password: password, // Only send if not empty
         };
-        console.log(data);
+
+        // Send requst to server
         try {
             // Try to edit user info and get response
             const response = await fetch('/user_main/settings', {
@@ -135,20 +142,21 @@ document.addEventListener('DOMContentLoaded', () => {
             } else { 
                 // HTML response handling
                 const result = await response.text();
-                console.log(result);
                 if (response.url.includes('/login')) {
                     alert('Έληξε η συνεδρία σας. Παρακαλώ συνδεθείτε ξανά.');
-                    window.location.href = response.url;
+                    window.location.href = response.url; // Redirect to login page if session expired
                     return
                 }
+
+                // If success, hide error label and close modal
                 errorLabel.style.display = 'none';
                 closeSettingsModal();
-                alert('Οι ρυθμίσεις αποθηκεύτηκαν επιτυχώς!');
-                window.location.reload();
+                alert('Οι ρυθμίσεις αποθηκεύτηκαν επιτυχώς!'); // Show success message
+                window.location.reload(); // Reload the page to reflect changes
             }   
-        } catch (err) {
+        } catch (err) { // If there is a network error, show error message
         errorLabel.textContent = 'Σφάλμα δικτύου.';
         errorLabel.style.display = 'block';
         }
     });
-    });
+});

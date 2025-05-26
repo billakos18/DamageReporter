@@ -21,7 +21,17 @@
                             <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
                             <p>Rejected - Απορρίφθηκε</p>
                           </div>
-                          <div class="deletebtn">
+                          <div class="actionbtn">
+                          <div class="menu-wrapper">
+                            <p class="menu-toggle">⋯</p>
+                            <ul class="dropdown-menu">
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
+                              <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
+                            </ul>
+                          </div>
                             <a href="/user_main/delete/{{this.report_id}}"><i class="fa fa-trash-o" id="delete-btn1"></i></a>
                           </div>
                       </div>
@@ -33,7 +43,17 @@
                             <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
                             <p>In progress - Σε εξέλιξη</p>
                           </div>
-                          <div class="deletebtn">
+                          <div class="actionbtn">
+                            <div class="menu-wrapper">
+                              <p class="menu-toggle">⋯</p>
+                              <ul class="dropdown-menu">
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
+                                <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
+                              </ul>
+                            </div>
                             <a href="/user_main/delete/{{this.report_id}}" style="pointer-events: none;"><i class="fa fa-trash-o" style="font-size:24px; color:gray;"></i></a>
                           </div>
                         </div>
@@ -45,8 +65,18 @@
                               <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
                               <p>Completed - Ολοκληρωμένο</p>
                             </div>
-                            <div class="deletebtn">
-                              <a href="/user_main/delete/{{this.report_id}}"  style="pointer-events: none;"><i class="fa fa-trash-o" style="font-size:24px; color:gray;;"></i></a>
+                            <div class="actionbtn">
+                              <div class="menu-wrapper">
+                                <p class="menu-toggle">⋯</p>
+                                <ul class="dropdown-menu">
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
+                                  <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
+                                </ul>
+                              </div>
+                              <a href="/user_main/delete/{{this.report_id}}"  style="pointer-events: none;"><i class="fa fa-trash-o" style="font-size:24px; color:gray;"></i></a>
                             </div>
                           </div>
                         {{else}}
@@ -57,7 +87,17 @@
                                 <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
                                 <p>Approved - Εγκρίθηκε</p>
                               </div>
-                              <div class="deletebtn">
+                              <div class="actionbtn">
+                                <div class="menu-wrapper">
+                                  <p class="menu-toggle">⋯</p>
+                                  <ul class="dropdown-menu">
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
+                                    <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
+                                  </ul>
+                                </div>
                                 <a href="/user_main/delete/{{this.report_id}}"  style="pointer-events: none;"><i class="fa fa-trash-o" style="font-size:24px; color:gray;"></i></a>
                               </div>
                             </div>
@@ -69,15 +109,15 @@
                                   <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
                                   <p>Received - Παραλήφθηκε</p>
                                 </div>
-                                <div class="deletebtn">
+                                <div class="actionbtn">
                                   <div class="menu-wrapper">
                                     <p class="menu-toggle">⋯</p>
                                     <ul class="dropdown-menu">
                                       <li><a href="/user_main/update_status/{{this.report_id}}?status=approved">Approved</a></li>
                                       <li><a href="/user_main/update_status/{{this.report_id}}?status=in%20progress">In progress</a></li>
-                                      <li><a href="/user_main/update_status/{{this.report_id}}">Blue</a></li>
+                                      <li><a href="/user_main/update_status/{{this.report_id}}?status=received">Received</a></li>
                                       <li><a href="/user_main/update_status/{{this.report_id}}?status=rejected">Rejected</a></li>
-                                      <li><a href="/user_main/update_status/{{this.report_id}}">Gray</a></li>
+                                      <li><a href="/user_main/update_status/{{this.report_id}}?status=completed">Completed</a></li>
                                     </ul>
                                   </div>
                                   {{!-- <p>...</p> --}}
@@ -95,71 +135,5 @@
         {{/if}} 
         </div>
     </div>
-      
-
 </section>
-
-{{!-- <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Toggle dropdown menu
-    document.querySelectorAll('.menu-toggle').forEach(toggle => {
-      toggle.addEventListener('click', function (e) {
-        e.stopPropagation();
-        const menu = this.nextElementSibling;
-        document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
-        menu.style.display = 'block';
-      });
-    });
-
-    // Click outside to close menu
-    window.addEventListener('click', () => {
-      document.querySelectorAll('.dropdown-menu').forEach(menu => {
-        menu.style.display = 'none';
-      });
-    });
-
-    // Handle status change
-    document.querySelectorAll('.dropdown-menu li').forEach(option => {
-      option.addEventListener('click', async function () {
-        const newStatus = this.getAttribute('data-status');
-        const newColor = this.getAttribute('data-color');
-        const reportItem = this.closest('.report-item');
-        const reportId = reportItem.getAttribute('data-report-id');
-
-        // Send to backend
-        try {
-          const res = await fetch(`/user_main/update_status/${reportId}`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ status: newStatus })
-          });
-
-          if (res.ok) {
-            // Update UI
-            reportItem.style.backgroundColor = newColor;
-            reportItem.querySelector('.status-text').innerText = newStatus.charAt(0).toUpperCase() + newStatus.slice(1) + " - " + getGreekLabel(newStatus);
-            this.parentElement.style.display = 'none';
-          } else {
-            alert('Failed to update status.');
-          }
-        } catch (err) {
-          console.error(err);
-          alert('Error updating status.');
-        }
-      });
-    });
-
-    function getGreekLabel(status) {
-      switch(status) {
-        case 'approved': return 'Εγκρίθηκε';
-        case 'in progress': return 'Σε εξέλιξη';
-        case 'completed': return 'Ολοκληρωμένο';
-        case 'rejected': return 'Απορρίφθηκε';
-        default: return '';
-      }
-    }
-  });
-</script> --}}
 

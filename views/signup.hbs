@@ -34,7 +34,9 @@
             </div>
             <div style="padding-top: 10px;">
                 {{#if error}}
-                    <label style="color:red;" class="error-message">{{error}}</label>
+                    <label id="erroLabel" style="color:red;" class="error-message">{{error}}</label>
+                {{else}}
+                    <label id="errorLabel" style="color:red;" class="error-message" style="display: none;"></label>
                 {{/if}}
             </div>
         </form>

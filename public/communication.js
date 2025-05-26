@@ -1,4 +1,8 @@
+
+// Communication script for the Patras Emergency App
 window.addEventListener('DOMContentLoaded', () => {  
+
+    // Theme toggle functionality
     const toggle = document.querySelector('#theme-toggle');
     const body = document.body;
     const savedTheme = localStorage.getItem('theme');
@@ -16,6 +20,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     });
 
+    // Language toggle functionality
+
+    // Define the texts for each language
     const texts = {
     el: {
         home: "Αρχική",
@@ -121,7 +128,10 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     };
     
+    // Set initial language based on localStorage or default to Greek
     const savedLang = localStorage.getItem('lang') || 'el';
+
+    // Update text content based on the selected language when flag is clicked
     document.querySelectorAll('.lang-flag').forEach(flag => {
     flag.addEventListener('click', () => {
         const lang = flag.dataset.lang;
@@ -143,6 +153,7 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.sign-in-btn').textContent = t.signin;
         }
 
+        // Update contact sections
         [
         {id: 'police', data: t.police},
         {id: 'fire-dept', data: t.fire},
@@ -150,15 +161,16 @@ window.addEventListener('DOMContentLoaded', () => {
         {id: 'deh', data: t.deh},
         {id: 'dhmos', data: t.dhmos},
         ].forEach(section => {
-        const container = document.querySelector(`#${section.id}`);
-        container.querySelector('h1').textContent = section.data.title;
-        const ps = container.querySelectorAll('p');
+        const container = document.querySelector(`#${section.id}`); // Get the container for the section
+        container.querySelector('h1').textContent = section.data.title; // Set the title of the section
+        const ps = container.querySelectorAll('p'); // Get all paragraph elements in the section
         ps.forEach((p, idx) => {
-            p.innerHTML = section.data.text[idx] || '';
+            p.innerHTML = section.data.text[idx] || ''; // Set the text for each paragraph
         });
         })
 
-        document.documentElement.lang = lang;
+        document.documentElement.lang = lang; // set the document language
+
         // toggle flag visibility
         if (lang === 'en') {
         document.querySelector('#gr').style.display  = 'block';
@@ -168,10 +180,12 @@ window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#eng').style.display = 'block';
         }
 
+        // Save the selected language to localStorage
         localStorage.setItem('lang', lang);
     });
     });
     
+    // Trigger click on the saved language flag, match the system language
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });

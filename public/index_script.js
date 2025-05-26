@@ -1,4 +1,8 @@
+
+// Main script for the start page
 window.addEventListener("DOMContentLoaded", () => {
+
+    // Theme toggle functionality
     const toggle = document.querySelector("#theme-toggle");
     const header = document.querySelector("header");
     const body = document.body;
@@ -18,7 +22,11 @@ window.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("theme", "light");
       }
     });
+
+    // Language toggle functionality
     const el = document.documentElement;
+
+    // Define the texts for each language
     const texts = {
       el: {
         home: "Αρχική",
@@ -56,7 +64,10 @@ window.addEventListener("DOMContentLoaded", () => {
       },
     };
 
+    // Set initial language based on localStorage or default to Greek
     const savedLang = localStorage.getItem("lang") || "el";
+
+    // Modify text based on language
     document.querySelectorAll(".lang-flag").forEach((flag) => {
       flag.addEventListener("click", () => {
         const lang = flag.dataset.lang;
@@ -93,9 +104,11 @@ window.addEventListener("DOMContentLoaded", () => {
           document.querySelector("#eng").style.display = "block";
         }
 
-        localStorage.setItem("lang", lang);
+        localStorage.setItem("lang", lang); // Save the selected language to localStorage
       });
     });
+
+    // Trigger click on the saved language flag, match the system language
     const startFlag = document.querySelector(
       `.lang-flag[data-lang="${savedLang}"]`
     );

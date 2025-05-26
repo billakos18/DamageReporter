@@ -144,6 +144,14 @@ iframe{
     border-radius: 5px;
 }
 
+select {
+    /* max-height: 120px;
+    overflow-y: auto; */
+    max-height: 100%;
+    max-width: 100%;       /* Prevent overflow */
+    box-sizing: border-box;
+}
+
 .next-btn {
     width: 20%;
     padding: 10px;

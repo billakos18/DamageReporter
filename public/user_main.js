@@ -1,4 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
+
+    // Theme toggle (dark/light mode)
     const toggle = document.querySelector('#theme-toggle');
     const header = document.querySelector('header');
     const body = document.body;
@@ -18,6 +20,8 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', 'light');
         }
     });
+
+    // Language toggle (greek/english)
     const el = document.documentElement;
     const texts = {
         el: {
@@ -71,7 +75,6 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#Cancel-signout-btn').textContent = t.signout_cancel;
 
             el.lang = lang;
-            // document.querySelector("#")
             if (el.lang === "en") {
                 document.querySelector("#gr").style.display = "block";
                 document.querySelector("#eng").style.display = "none";
@@ -82,8 +85,37 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('lang', lang)
         });
     });
+
+    // Trigger click on the saved language flag, match the system language
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
+
+    // Status dropdown menu for admin
+    if(user.user_phone == "6900000000"){
+        document.querySelectorAll('.menu-toggle').forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+    
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.style.display = 'none';
+                });
+                const menu = toggle.nextElementSibling;
+                if(menu&& menu.classList.contains('dropdown-menu')) {
+                    menu.style.display = 'block';
+                }
+            });
+        });
+    
+        window.addEventListener('click', () => {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        });
+    } else{ // No status dropdown for regular user
+        document.querySelectorAll(".menu-toggle").forEach(toggle => {
+            toggle.style.display = 'none';
+        })
+    }
 });
 
 

@@ -8,6 +8,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 const model = await import(`../model/damages_model.mjs`);
 
+// Function to render the home page
 export async function showHome(req, res) {
     try {
         if (req.session.user) {
@@ -35,6 +36,7 @@ export async function showHome(req, res) {
     }
 }
 
+// Function to render the communications page
 export async function showCommunications(req, res) {
     try {
         res.render("communication", { 
@@ -50,7 +52,7 @@ export async function showCommunications(req, res) {
     }
 }
 
-
+// Function to render the report damage page
 export async function reportDamage(req, res) {
     try {
         res.render("report", { 
@@ -67,6 +69,7 @@ export async function reportDamage(req, res) {
     }
 }
 
+// Function to render the recent reports page
 export async function showRecentReports(req, res) {
     try {
         const recentReports = await model.getRecentReports();
@@ -85,21 +88,19 @@ export async function showRecentReports(req, res) {
     }
 }
 
+// Function to handle adding a new report
 export async function addReport(req, res) {
     try {
-
-        // console.log(req.file?.buffer);
-        // type, description, street, number, area, pcode, latitude, longitude, userPhone, photo
         const {
             street,
             'street-number': streetNumber,
             'postal-code': postalCode,
             area,
             latitude,
-            longitude, // this was misspelled as "longtitude"
-            damage: type, // "damage" is the actual name in the form
+            longitude, 
+            damage: type, 
             comments,
-            mobile // "modile" is the field name in the form
+            mobile 
             } = req.body;
 
         const result = await model.addReport(
@@ -117,20 +118,14 @@ export async function addReport(req, res) {
         if (result) {
             res.redirect('/recentReports');
         } else {
-            console.log("Failed to add report");
             res.status(500).send('Failed to add report');
         }
-   
-        // const userId = req.session.user.user_id;
-        // const reportDate = new Date();
-        // await model.addReport(report_type, report_latitude, report_longitude, report_status, userId, reportDate);
-        // res.redirect('/recentReports');
     } catch (error) {
-        console.error('Error adding report:', error);
         res.status(500).send('Internal Server Error');
     }
 }
 
+// Function to delete a report
 export async function deleteReport(req, res) {
     const reportId = req.params.reportId;
     try {
@@ -142,22 +137,20 @@ export async function deleteReport(req, res) {
     }
 }
 
+// Function to edit the status of a report
 export async function editReportStatus(req, res) {
-    const reportId = req.params.reportId;
-    console.log("params:", req.params);
-    console.log("body:", req.body);
+    const reportId = req.params.id;
     const newStatus = req.query.status;
-    console.log(newStatus);
     
     try{
         await model.editStatus(reportId, newStatus);
         res.redirect('/user_main');
     } catch(err){
-        console.log('Error updating status:', err);
         res.status(500).send('Internal Server Error');
     }
 }
 
+// Function to edit the phone number in a report
 export async function editReportPhone(req, res) {
     const newPhone = req.body.phone;
     const oldPhone = req.customData.oldPhone; // old phone number stored in customData
@@ -168,18 +161,15 @@ export async function editReportPhone(req, res) {
             res.redirect('/user_main');
         }
         else {
-            console.log("Failed to edit report phone");
-            // res.status(500).send('Failed to edit report phone');
             res.json({ error: 'Failed to edit report phone', success: false });
         }
     }
     catch (error) {
-        console.error('Error editing report phone:', error);
         res.status(500).send('Internal Server Error');
     }
 }
 
-
+// Function to edit user information
 export async function editUserInfo(req, res, next) {
     try {
         const user = req.session.user;
@@ -200,16 +190,14 @@ export async function editUserInfo(req, res, next) {
             req.session.user = updatedUser; // Update session with new user info
             next(); // Proceed to the next middleware or route handler
         } else {
-            // res.status(400).send('Failed to update user information');
             res.json({ error: 'Failed to update user information', success: false });
         }
     } catch (error) {
-        console.error('Error updating user information:', error);
         res.status(500).send('Internal Server Error');
     }
 }
 
-// Needs testing
+// Function to check if the phone number or email is already used
 export async function checkUsedPhone_Email(req, res, next) {
     const phone = req.body.phone;
     const email = req.body.email;
@@ -222,30 +210,38 @@ export async function checkUsedPhone_Email(req, res, next) {
         // If either phone or email already exists, return an error
         if (req.session?.user) {
             if (existingPhone && existingPhone.user_id !== req.session.user.user_id) {
-                return res.json({ error: 'Το τηλέφωνο ανήκει σε άλλο χρήστη', success: false });
+                return res.json({ error: 'Phone number belongs to another user', success: false });
             }
             if (existingEmail && existingEmail.user_id !== req.session.user.user_id) {
-                return res.json({ error: 'Το email ανήκει σε άλλο χρήστη', success: false });
+                return res.json({ error: 'Email belongs to another user', success: false });
             }
         }
         else{
-            return res.json({ error: 'Παρακαλούμε επανασυνδεθείτε', success: false });
+            return res.json({ error: 'Session expired. Please reconnect.', success: false });
         }
 
         // Store the old phone number in customData for later use
         req.customData = { oldPhone: phone };
         next();
     } catch (error) {
-        console.error('Error checking phone/email:', error);
         res.status(500).send('Internal Server Error');
     }
 }
 
+// Check if the user is authenticated (session exists)
 export async function checkAuthentication(req, res, next) {
     if (req.session.user) {
         next();
     } 
     else {
         res.redirect('/login');
+    }
+}
+
+export async function checkAdmin(req, res, next) {
+    if (req.session.user.user_email === 'admin@admin.com'){
+        next();
+    } else {
+        res.status(200);
     }
 }

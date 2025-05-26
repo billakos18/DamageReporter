@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 import multer from 'multer';
 
-const upload = multer({ storage: multer.memoryStorage() });
+const upload = multer({ storage: multer.memoryStorage() }); 
 
 const damagesController = await import(`../controller/damages_controller.mjs`);
 const loginController = await import(`../controller/login_controller.mjs`);
@@ -25,7 +25,7 @@ router.get('/signup', loginController.showSignup);
 router.get('/recentReports', damagesController.showRecentReports);
 router.get('/user_main', damagesController.checkAuthentication, loginController.showUserMain);
 router.get('/user_main/delete/:reportId', damagesController.checkAuthentication, damagesController.deleteReport);
-router.get('/user_main/update_status/:id', damagesController.checkAuthentication, damagesController.editReportStatus);
+router.get('/user_main/update_status/:id', damagesController.checkAdmin, damagesController.editReportStatus);
 
 router.post('/report', upload.single('image'), damagesController.addReport);
 router.post('/login', loginController.loginUser);

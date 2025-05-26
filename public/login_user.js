@@ -1,4 +1,8 @@
+
+// Login User page script
 window.addEventListener('DOMContentLoaded', () => {
+
+    // Theme toggle functionality
     const toggle = document.querySelector('#theme-toggle');
     const header = document.querySelector('header');
     const body = document.body;
@@ -18,7 +22,11 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', 'light');
         }
     });
+
+    // Language toggle functionality
     const el = document.documentElement;
+
+    // Define the texts for each language
     const texts = {
         el: {
             home: "Αρχική",
@@ -44,7 +52,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Set initial language based on localStorage or default to Greek
     const savedLang = localStorage.getItem('lang') || 'el';
+
+    // Modify text based on language
     document.querySelectorAll(".lang-flag").forEach(flag => {
         flag.addEventListener("click", () => {
             const lang = flag.dataset.lang;
@@ -58,11 +69,13 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector(".login-btn").textContent = t.login;
             document.querySelector(".register-link").textContent = t.register;
 
+            // Update error message if it exists
             const errLabel = document.querySelector(".error-message");
             if(errLabel) {
                 errLabel.textContent = t.error;
             }
-
+            
+            // Set the document language
             el.lang = lang;
             if (el.lang === "en") {
                 document.querySelector("#gr").style.display = "block";
@@ -74,10 +87,8 @@ window.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('lang', lang)
         });
     });
-    // const errLabel = document.querySelector(".error-message");
-    // if (errLabel){
-    //     errLabel.textContent = errLabel.dataset[savedLang]; 
-    // }
+
+    // Trigger click on the saved language flag, match the system language
     const startFlag = document.querySelector(`.lang-flag[data-lang="${savedLang}"]`);
     if (startFlag) startFlag.click();
 });
