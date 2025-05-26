@@ -327,6 +327,7 @@ const texts = {
             "Prosfigika",
             "Skagiopoulio",
             "Terpsithea",
+            "Psila Alonia",
             "Other"
         ],
         current_loc_btn: "Current Location",
