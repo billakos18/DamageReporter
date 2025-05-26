@@ -84,13 +84,7 @@
                 <input type="text" id="comments" name="comments" placeholder="Αναφέρετε σχόλια σχετικά με την βλάβη"
                     rows="10">
             </div>
-
-            <div class="report-container">
-                <button type="submit" id="report-btn-w2" class="report-btn">Δήλωση</button>
-            </div>
-            <div class="previous-container">
-                <button type="button" id="previous-btn-w2" class="previous-btn">Προηγούμενο</button>
-            </div>
+            
             <div class="row">
                 <div class="input-group">
                     <label id="image-label" for="image">Φωτογραφία (προαιρετικό)</label>
@@ -107,36 +101,13 @@
                     {{/if}}
                 </div>
             </div>
-            {{!-- <div class="input-group">
-            </div> --}}
-        </div>
-        {{!-- <div id="wizard-step-3" class="wizard" style="display: none">
-            <h2>Πληροφορίες Επικοινωνίας</h2>
-            <div class="row">
-                <div class="input-group">
-                    <label id="first-name-label" for="first-name">Όνομα</label>
-                    <input type="text" id="first-name" name="first-name" required>
-                </div>
-                <div class="input-group">
-                    <label id="last-name-label" for="last-name">Επώνυμο</label>
-                    <input type="text" id="last-name" name="last-name" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    {{#if user}}
-                    <input type="email" id="email" name="email" value={{user.user_email}} required>
-                    {{else}}
-                    <input type="email" id="email" name="email" required>
-                    {{/if}}
-                </div>
-            </div>
-            
             <div class="previous-container">
-                <button type="button" id="previous-btn-w3" class="previous-btn">Προηγούμενο</button>
+                <button type="button" id="previous-btn-w2" class="previous-btn">Προηγούμενο</button>
             </div>
-        </div> --}}
+            <div class="report-container">
+                <button type="submit" id="report-btn-w2" class="report-btn">Δήλωση</button>
+            </div>
+        </div>
     </form>
 </div>
 <button id="use-location-btn" style="display: none;" class="use-location-btn">
