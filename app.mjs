@@ -12,8 +12,7 @@ app.use(express.json());
 
 // Session setup
 app.use(session({
-    // secret: argon.hash('a_really_big_secret_key_that_not_even_I_know_and_is_hard_to_guess'),
-    secret: "b59b5c26b1587938d65cc8a8fa8ce01b",
+    secret: process.env.SESSION_SECRET,
     cookie: { maxAge: 1000 * 60 * 10 }, // 10 minutes  
     resave: false,
     saveUninitialized: false
