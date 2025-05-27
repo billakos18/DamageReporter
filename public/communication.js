@@ -91,7 +91,7 @@ window.addEventListener('DOMContentLoaded', () => {
             `<strong>1st Precinct</strong> - Tel: <a a href="tel:+302614409750">261 440 9750</a>, Address: Πανεπιστημίου 138, Ανθούπολη, 264 43 Πάτρα Αχαΐας`,
             `<strong>2nd Precinct</strong> - Tel: <a a href="tel:+302610695282">261 069 5282</a>, Address: Ερμού 95, 26110 Πάτρα Αχαΐας`,
             `<strong>3rd Precinct</strong> - Tel: <a a href="tel:+302610344850">261 034 4850</a>, Address: Φιλίππου και Ολυμπιάδος &amp Νικοπόλεως, 26332 Πάτρα Αχαΐας`,
-            `<strong>Τμήμα Τροχαίας</strong> - Tel: <a a href="tel:+302614409770">261 440 9770</a>, Address: Πανεπιστημίου 138, Ανθούπολη, 264 43 Πάτρα Αχαΐας`
+            `<strong>Traffic Police Division</strong> - Tel: <a a href="tel:+302614409770">261 440 9770</a>, Address: Πανεπιστημίου 138, Ανθούπολη, 264 43 Πάτρα Αχαΐας`
         ]
         },
         fire: {
@@ -100,7 +100,7 @@ window.addEventListener('DOMContentLoaded', () => {
             `<strong>Website:</strong> <a href="https://www.fireservice.gr/el" target="_blank">https://www.fireservice.gr/el</a>`,
             `<strong>1st Fire Station</strong> - Tel: <a a href="tel:+302610333211">261 033 3211</a>, Address: Ναυαρίνου 120, Χαλκώματα, 262 22 Πάτρα Αχαΐας`,
             `<strong>2nd Fire Station</strong> - Tel: <a a href="tel:+302610340506">261 034 0506</a>, Address: Κτίριο Λιμένα Πατρών ΠΑΤΡΑ 26110, Μαρούδα, Πάτρα Αχαΐας`,
-            `<strong>Διοίκηση Πυροσβεστικών Υπηρεσιών</strong> - Tel: <a a href="tel:+302610434664">261 043 4664</a>, Address: Ν.Ε.Ο Πατρών - Αθηνών 147 ΠΑΤΡΑ 26110, Μαρούδα, Πάτρα Αχαΐας`
+            `<strong>Fire Services Administration</strong> - Tel: <a a href="tel:+302610434664">261 043 4664</a>, Address: Ν.Ε.Ο Πατρών - Αθηνών 147 ΠΑΤΡΑ 26110, Μαρούδα, Πάτρα Αχαΐας`
         ]
             
         },
@@ -108,21 +108,21 @@ window.addEventListener('DOMContentLoaded', () => {
         title: "Water Authority",
         text: [
             `<strong>Website:</strong> <a href="https://deyaponline.gr/" target="_blank">https://deyaponline.gr/</a>`,
-            `<strong>Υπηρεσία Πατρών</strong> - Tel: <a a href="tel:+302610366100">2610 366 100</a>, Address: Γλαύκου 93, 263 32 Πάτρα Αχαΐας`
+            `<strong>Local service</strong> - Tel: <a a href="tel:+302610366100">2610 366 100</a>, Address: Γλαύκου 93, 263 32 Πάτρα Αχαΐας`
         ]
         },
         deh: {
         title: "Electricity Authority",
         text: [
             `<strong>Website:</strong> <a href="https://www.dei.gr/el/" target="_blank">https://www.dei.gr/el/</a>`,
-            `<strong>Υπηρεσία Πατρών</strong> - Tel: <a a href="tel:+302610642763">261 064 2763</a>, Address: Εγλυκάδα, 263 35 Πάτρα Αχαΐας`
+            `<strong>Local service</strong> - Tel: <a a href="tel:+302610642763">261 064 2763</a>, Address: Εγλυκάδα, 263 35 Πάτρα Αχαΐας`
         ]
         },
         dhmos: {
         title: "Municipality of Patras",
         text: [
             `<strong>Website:</strong> <a href="https://e-patras.gr/el" target="_blank">https://e-patras.gr/el</a>`,
-            `<strong>Υπηρεσία Πατρών</strong> - Tel: <a a href="tel:+302613610200">261 361 0200</a>, Address: Μαιζώνος 108, 26221 Πάτρα Αχαΐας`
+            `<strong>Local service</strong> - Tel: <a a href="tel:+302613610200">261 361 0200</a>, Address: Μαιζώνος 108, 26221 Πάτρα Αχαΐας`
         ]
         }
     }
