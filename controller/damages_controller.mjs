@@ -1,11 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import multer from 'multer';
-
-const upload = multer({ storage: multer.memoryStorage() });
-
-
 const model = await import(`../model/damages_model.mjs`);
 
 // Function to render the home page
