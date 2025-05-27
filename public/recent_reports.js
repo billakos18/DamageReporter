@@ -103,6 +103,13 @@ window.addEventListener('DOMContentLoaded', () => {
 // Show recent reports on the map as markers
 if (window.reports) {
     window.reports.forEach(report => {
+
+        const lat = Number(report.report_latitude);
+        const lng = Number(report.report_longitude);
+
+        if (Number.isNaN(lat) || Number.isNaN(lng)) {
+            return;
+        }      
         const marker = L.marker([report.report_latitude, report.report_longitude]).addTo(map);
         marker.bindPopup(`
             <strong>${report.report_type}</strong><br>

@@ -2,7 +2,6 @@ import express from 'express';
 import session from 'express-session';
 import { engine } from 'express-handlebars';
 import damagesRoutes from './routes/damages_routes.mjs';
-import argon from 'argon2';
 
 const app = express();
 
