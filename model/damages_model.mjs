@@ -3,8 +3,8 @@ import argon2 from 'argon2';
 
 // Create a new PostgreSQL client instance
 const client = new Client({
-  connectionString: 'postgresql://damage_reporter_database_user:6hEVXqguu9vCkGto8PVahfxTlb0VOux6@dpg-d0q9tmjipnbc73e6dl10-a.frankfurt-postgres.render.com/damage_reporter_database',
-  ssl: {
+  connectionString: process.env.DATABASE_URL,
+    ssl: {
     rejectUnauthorized: false
   }
 });
