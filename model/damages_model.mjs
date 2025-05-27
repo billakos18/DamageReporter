@@ -142,7 +142,7 @@ export async function addReport(type, description, street, number, area, pcode, 
 export async function getUserReports(userPhone) {
     if (userPhone === "6900000000"){
         // If the user is an admin, return all reports
-        let query = "SELECT report_id, report_type, to_char(report_date, 'YYYY-MM-DD') as report_date, report_latitude, report_longitude, report_status, report_street, report_street_number, report_area FROM \"Report\"";
+        let query = "SELECT report_id, report_type, report_description, to_char(report_date, 'YYYY-MM-DD') as report_date, report_latitude, report_longitude, report_status, report_street, report_street_number, report_area FROM \"Report\"";
         try {
             const res = await client.query(query);
             return res.rows;

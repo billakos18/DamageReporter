@@ -124,6 +124,19 @@ img{
   overflow: visible;
 }
 
+.report-item .report-details{
+  flex: 1 1 0;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.report-item .description {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+}
+
 .actionbtn{
   display: flex;
   flex-direction: column;
@@ -134,7 +147,6 @@ img{
 
 .menu-wrapper {
   position: relative;
-  /* overflow: visible; */
 }
 
 .menu-toggle {

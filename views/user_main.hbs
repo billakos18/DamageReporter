@@ -16,9 +16,12 @@
           {{#each reports}}
                     {{#if (eq this.report_status "rejected")}}
                       <div class="report-item" style="background-color: #f82536;">
-                        <div>
+                        <div class="report-details">
                             <h4>{{this.report_type}}</h4>
                             <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                            {{#if this.report_description}}
+                              <p>{{this.report_description}}</p>
+                            {{/if}}
                             <p>Rejected - Απορρίφθηκε</p>
                           </div>
                           <div class="actionbtn">
@@ -38,9 +41,12 @@
                     {{else}}
                       {{#if (eq this.report_status "in progress")}}
                         <div class="report-item" style="background-color: #ffab66;">
-                          <div>
+                          <div class="report-details">
                             <h4>{{this.report_type}}</h4>
                             <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                            {{#if this.report_description}}
+                              <p>{{this.report_description}}</p>
+                            {{/if}}
                             <p>In progress - Σε εξέλιξη</p>
                           </div>
                           <div class="actionbtn">
@@ -60,9 +66,12 @@
                       {{else}}
                         {{#if (eq this.report_status "completed")}}
                           <div class="report-item" style="background-color: #1dd18c;">
-                            <div>
+                            <div class="report-details">
                               <h4>{{this.report_type}}</h4>
                               <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                              {{#if this.report_description}}
+                                <p>{{this.report_description}}</p>
+                              {{/if}}
                               <p>Completed - Ολοκληρωμένο</p>
                             </div>
                             <div class="actionbtn">
@@ -82,9 +91,12 @@
                         {{else}}
                           {{#if (eq this.report_status "approved")}}
                             <div class="report-item" style="background-color: #a3559a;">
-                              <div>
+                              <div class="report-details">
                                 <h4>{{this.report_type}}</h4>
                                 <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                                {{#if this.report_description}}
+                                  <p>{{this.report_description}}</p>
+                                {{/if}}
                                 <p>Approved - Εγκρίθηκε</p>
                               </div>
                               <div class="actionbtn">
@@ -104,9 +116,12 @@
                           {{else}}
                             {{#if (eq this.report_status "received")}}
                               <div class="report-item">
-                                <div>
+                                <div class="report-details">
                                   <h4>{{this.report_type}}</h4>
                                   <p>{{this.report_street}} {{this.report_street_number}} {{this.report_area}}</p>
+                                  {{#if this.report_description}}
+                                  <p class="description">{{this.report_description}}</p>
+                                  {{/if}}
                                   <p>Received - Παραλήφθηκε</p>
                                 </div>
                                 <div class="actionbtn">
